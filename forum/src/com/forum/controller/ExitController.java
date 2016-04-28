@@ -14,12 +14,12 @@ public class ExitController implements Controller{
 			HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("email");
-		System.out.println("退出时会话的内容："+email);
+		String userName = (String) session.getAttribute("userName");
+		System.out.println("退出时会话的内容："+userName);
 		
-		session.removeAttribute("email");
+		session.removeAttribute("userName");
 		
-		return new ModelAndView("redirect:/index.jsp");
+		return new ModelAndView("redirect:/user/index.jsp");
 	}
 
 }

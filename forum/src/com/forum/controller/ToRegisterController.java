@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-public class ToIndexController implements Controller{
+public class ToRegisterController implements Controller{
 
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		return new ModelAndView("redirect:/user/index.jsp");
+	public ModelAndView handleRequest(HttpServletRequest arg0,
+			HttpServletResponse arg1) throws Exception {
+		return new ModelAndView("redirect:/user/register.jsp");
 	}
 
 }

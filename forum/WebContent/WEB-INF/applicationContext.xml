@@ -10,9 +10,13 @@
              default-autowire="byName">
   
 	<bean id="user" class="com.forum.model.User"/>
+	<bean id="authority" class="com.forum.model.Authority"></bean>
   
 	 <bean id="userDaoImp" class="com.forum.dao.UserDaoImp">
 	 	<property name="user" ref="user"/>
+	 </bean>
+	 <bean id="authorityDaoImp" class="com.forum.dao.AuthorityDaoImp">
+	 	<property name="authority" ref="authority"></property>
 	 </bean>
 	
 	<!-- 将URL直接映射到具体的业务控制器 -->
@@ -23,19 +27,38 @@
 				<prop key="toIndex.do">toIndex</prop>
 				<prop key="userLogin.do">userLogin</prop>
 				<prop key="exit.do">exit</prop>
+				<prop key="toRegister.do">toRegister</prop>
+				<prop key="checkcode.do">checkcode</prop>
+				<prop key="changeCheckcode.do">changeCheckcode</prop>
+				<prop key="toLogin.do">toLogin</prop>
+				<prop key="toSingel.do">toSingel</prop>
+				<prop key="toModifyPwd.do">toModifyPwd</prop>
+				<prop key="modifyPwd.do">modifyPwd</prop>
 			</props>
 		</property>
 	</bean>
 	<bean id="userRegister" class="com.forum.controller.UserRegisterController" scope="prototype">
 		<property name="ud" ref="userDaoImp"/>
 		<property name="user" ref="user"/>
+		<property name="ad" ref="authorityDaoImp"/>
+		<property name="authority" ref="authority"/>
 	</bean>
 	<bean id="toIndex" class="com.forum.controller.ToIndexController" scope="prototype"></bean>
 	<bean id="userLogin" class="com.forum.controller.UserLoginController" scope="prototype">
 		<property name="ud" ref="userDaoImp"/>
 		<property name="user" ref="user"/>
 	</bean>
+	<bean id="toRegister" class="com.forum.controller.ToRegisterController" scope="prototype"></bean>
 	<bean id="exit" class="com.forum.controller.ExitController" scope="prototype"></bean>
+	<bean id="checkcode" class="com.forum.checkcode.Checkcode" scope="prototype"></bean>
+	<bean id="changeCheckcode" class="com.forum.checkcode.ChangeCheckcode" scope="prototype"></bean>
+	<bean id="toLogin" class="com.forum.controller.ToLoginController" scope="prototype"></bean>
+	<bean id="toSingel" class="com.forum.controller.ToSingelController" scope="prototype"></bean>
+	<bean id="toModifyPwd" class="com.forum.controller.ToModifyPwdController" scope="prototype"></bean>
+	<bean id="modifyPwd" class="com.forum.controller.ModifyPwdController" scope="prototype">
+		<property name="ud" ref="userDaoImp"/>
+		<property name="user" ref="user"/>
+	</bean>
 	<!-- id的名字必须和HandlerMapping中保持一致。因为我们用的是SimpleUrlHandlerMapping -->
 	
 	<!-- 配置试图解析器 -->
