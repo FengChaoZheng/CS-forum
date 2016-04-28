@@ -4,8 +4,11 @@ public class User {
 	
 	private int id;
 	private String name;
+	private String sex;
 	private String password;
 	private String email;
+	private int authority;
+	private String lastTime;
 	public int getId() {
 		return id;
 	}
@@ -29,6 +32,24 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public int getAuthority() {
+		return authority;
+	}
+	public void setAuthority(int authority) {
+		this.authority = authority;
+	}
+	public String getLastTime() {
+		return lastTime;
+	}
+	public void setLastTime(String lastTime) {
+		this.lastTime = lastTime;
 	}
 
 }
