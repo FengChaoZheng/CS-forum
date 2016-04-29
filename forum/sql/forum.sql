@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50523
 File Encoding         : 65001
 
-Date: 2016-04-29 00:32:44
+Date: 2016-04-30 01:12:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -184,7 +184,7 @@ CREATE TABLE `forum_user` (
   UNIQUE KEY `name_unique` (`name`),
   KEY `user_authority_id` (`authority_id`),
   CONSTRAINT `user_authority_id` FOREIGN KEY (`authority_id`) REFERENCES `forum_authority` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of forum_user
@@ -194,3 +194,7 @@ INSERT INTO `forum_user` VALUES ('2', '知识', '男', '4QrcOUm6Wau+VuBX8g+IPg==
 INSERT INTO `forum_user` VALUES ('3', '方式', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123@123.com', '1', '2016-04-28 19:49:09');
 INSERT INTO `forum_user` VALUES ('4', '打扰', '女', '4QrcOUm6Wau+VuBX8g+IPg==', '1234@111.com', '1', '2016-04-28 19:56:37');
 INSERT INTO `forum_user` VALUES ('5', 'et', '女', '4QrcOUm6Wau+VuBX8g+IPg==', 'et@163.com', '1', '2016-04-29 00:32:01');
+INSERT INTO `forum_user` VALUES ('6', '给他', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@12.com', '1', '2016-04-30 00:49:41');
+INSERT INTO `forum_user` VALUES ('7', '虎牙', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@22.com', '1', '2016-04-30 00:52:17');
+INSERT INTO `forum_user` VALUES ('8', '考研', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@12.com', '1', '2016-04-30 00:57:12');
+INSERT INTO `forum_user` VALUES ('9', '一条', '女', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@123.com', '3', '2016-04-30 01:12:26');
