@@ -24,7 +24,7 @@ public class UserDaoImp implements UserDao {
 	private ResultSet rs=null;
 
 	//"id,name,sex,password,email,authority_id,last_login_ime";
-	protected static String INSERT_SQL="insert into forum_user(id,name,sex,password,email,last_login_time) values(?,?,?,?,?,?)";
+	protected static String INSERT_SQL="insert into forum_user values(?,?,?,?,?,?,?)";
 	protected static String SELECT_SQL="select * from forum_user where name=? and password=?";
 	protected static String UPDATE_password_SQL="update forum_user set password=? where name=?";
 	protected static String UPDATE_authority_SQL="update forum_user set authority_id=? where id=?";
@@ -49,7 +49,8 @@ public class UserDaoImp implements UserDao {
 	    	  prepStmt.setString(4,Encipher.MD5(newUser.getPassword()));//password
 	    	  System.out.println(newUser.getPassword());
 	    	  prepStmt.setString(5,newUser.getEmail());//email
-	    	  prepStmt.setString(6, newUser.getLastTime());//last_login_time
+	    	  prepStmt.setInt(6, newUser.getAuthority());//authority_id
+	    	  prepStmt.setString(7, newUser.getLastTime());//last_login_time
 	          prepStmt.executeUpdate();
 	      } catch(Exception e){
 	    	  e.printStackTrace();

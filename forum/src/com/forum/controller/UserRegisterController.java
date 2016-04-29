@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
@@ -39,6 +40,7 @@ public class UserRegisterController implements Controller{
 			HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
 		
 		String userName = request.getParameter("username");
 		System.out.println("接收页面数据："+ userName);
@@ -86,9 +88,10 @@ public class UserRegisterController implements Controller{
 			DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time=format.format(date);
 			user.setLastTime(time);
-			ud.create(user);
-			
-			return new ModelAndView("admin/index");
+			user = ud.create(user);
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userName", user.getName());
+			return new ModelAndView("redirect:/admin/adminIndex.jsp");
 		}
 		
 		return new ModelAndView("redirect:/user/register.jsp");
