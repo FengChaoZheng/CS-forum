@@ -4,28 +4,43 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.forum.database.DBConnect;
+import com.forum.model.Authority;
 import com.forum.model.User;
 import com.forum.util.Encipher;
 
 public class UserDaoImp implements UserDao {
 	
 	private User user;
+	private Authority authority;
+	private AuthorityDao ad;
 	public void setUser(User user) {
 		this.user = user;
+	}	
+	public void setAuthority(Authority authority) {
+		this.authority = authority;
 	}
-	
+	public void setAd(AuthorityDao ad) {
+		this.ad = ad;
+	}
+
 	private Connection con=null;
 	private PreparedStatement prepStmt=null;
 	private PreparedStatement prepStmt1=null;
 	private ResultSet rs=null;
+	
+	public int pageSize = 5;
 
 	//"id,name,sex,password,email,authority_id,last_login_ime";
 	protected static String INSERT_SQL="insert into forum_user values(?,?,?,?,?,?,?)";
 	protected static String SELECT_SQL="select * from forum_user where name=? and password=?";
+	protected static String SELECT_ADMIN_SQL="select * from forum_user where name=? and password=? and authority_id=?";
 	protected static String UPDATE_password_SQL="update forum_user set password=? where name=?";
 	protected static String UPDATE_authority_SQL="update forum_user set authority_id=? where id=?";
 	protected static String UPDATE_date_SQL="update forum_user set last_login_time=? where name=?";
@@ -49,7 +64,8 @@ public class UserDaoImp implements UserDao {
 	    	  prepStmt.setString(4,Encipher.MD5(newUser.getPassword()));//password
 	    	  System.out.println(newUser.getPassword());
 	    	  prepStmt.setString(5,newUser.getEmail());//email
-	    	  prepStmt.setInt(6, newUser.getAuthority());//authority_id
+	    	  authority.setName(newUser.getAuthority());
+	    	  prepStmt.setInt(6, ad.findId(authority).getId());//authority_id
 	    	  prepStmt.setString(7, newUser.getLastTime());//last_login_time
 	          prepStmt.executeUpdate();
 	      } catch(Exception e){
@@ -79,6 +95,13 @@ public class UserDaoImp implements UserDao {
 	    try {
 	        con=DBConnect.getDBconnection();
             prepStmt = con.prepareStatement(SELECT_SQL);
+            
+            Date date = new Date();
+    		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    		String time = format.format(date);
+    		user.setLastTime(time);
+    		new UserDaoImp().updateDate(user);
+    		
             prepStmt.setString(1,newUser.getName());
             System.out.println("find name:"+newUser.getName());
             prepStmt.setString(2,Encipher.MD5(newUser.getPassword()));
@@ -90,7 +113,46 @@ public class UserDaoImp implements UserDao {
             	user.setSex(rs.getString(3));
             	user.setPassword(rs.getString(4));
             	user.setEmail(rs.getString(5));
-            	user.setAuthority(rs.getInt(6));
+            	authority.setId(rs.getInt(6));
+            	user.setAuthority(ad.findName(authority).getName());
+            	user.setLastTime(rs.getString(7));
+            	return user;
+           }
+      } catch (Exception e) {
+    	  e.printStackTrace();
+      } finally {
+    	     DBConnect.closeDB(con, prepStmt, rs);
+      }
+		return null;
+	}
+	
+	@Override
+	public User findAdmin(User newUser) throws Exception {
+	    try {
+	        con=DBConnect.getDBconnection();
+            prepStmt = con.prepareStatement(SELECT_ADMIN_SQL);
+            
+            Date date = new Date();
+    		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    		String time = format.format(date);
+    		user.setLastTime(time);
+    		new UserDaoImp().updateDate(user);
+            
+            prepStmt.setString(1,newUser.getName());
+            System.out.println("find name:"+newUser.getName());
+            prepStmt.setString(2,Encipher.MD5(newUser.getPassword()));
+            System.out.println("find pwd:"+newUser.getPassword());
+            authority.setName(newUser.getAuthority());
+            prepStmt.setInt(3,ad.findId(authority).getId());
+            rs = prepStmt.executeQuery();
+            if (rs.next()){
+            	user.setId(rs.getInt(1));
+            	user.setName(rs.getString(2)); 
+            	user.setSex(rs.getString(3));
+            	user.setPassword(rs.getString(4));
+            	user.setEmail(rs.getString(5));
+            	authority.setId(rs.getInt(6));
+            	user.setAuthority(ad.findName(authority).getName());
             	user.setLastTime(rs.getString(7));
             	return user;
            }
@@ -110,9 +172,13 @@ public class UserDaoImp implements UserDao {
         rs = prepStmt.executeQuery();
         while(rs.next()) {
         	user.setId(rs.getInt(1));
-            user.setName(rs.getString(2)); 
-            user.setPassword(rs.getString(3));
-            user.setEmail(rs.getString(4));
+        	user.setName(rs.getString(2)); 
+        	user.setSex(rs.getString(3));
+        	user.setPassword(rs.getString(4));
+        	user.setEmail(rs.getString(5));
+        	authority.setId(rs.getInt(6));
+        	user.setAuthority(ad.findName(authority).getName());
+        	user.setLastTime(rs.getString(7));
             listUser.add(user);
         }
         DBConnect.closeDB(con, prepStmt, rs); 
@@ -157,14 +223,57 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public int getPageCount() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+
+		int recordCount=0,t1=0,t2=0;
+		try {
+			con = DBConnect.getDBconnection();
+			String sql = "select count(*) from forum_user";
+			prepStmt=con.prepareStatement(sql);
+			rs=prepStmt.executeQuery();
+			rs.next();
+			recordCount=rs.getInt(1);
+			t1=recordCount%pageSize;
+			t2=recordCount/pageSize;
+		}finally {
+			rs.close();
+			prepStmt.close();
+			DBConnect.closeDB(con, prepStmt, rs);;
+		}
+		return t1==0?t2:t2+1;
 	}
 
 	@Override
-	public List<User> listUser(int pageNo) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> listUser(int pageNo) throws Exception {
+		
+		int startRecno=(pageNo-1)*pageSize;
+		ArrayList<User> userList=new ArrayList<User>();
+		try {
+			con = DBConnect.getDBconnection();
+			String sql = "select * from forum_user order by id limit ?,?";
+			prepStmt=con.prepareStatement(sql);
+			prepStmt.setInt(1,startRecno);
+			prepStmt.setInt(2,pageSize);
+			rs=prepStmt.executeQuery();
+			while(rs.next()) {
+				User newUser = new User();
+				newUser.setId(rs.getInt(1));
+	        	System.out.println("rs.getInt:"+rs.getInt(1));
+	        	System.out.println("user.getId:"+newUser.getId());
+	        	newUser.setName(rs.getString(2)); 
+	        	newUser.setSex(rs.getString(3));
+	        	newUser.setPassword(rs.getString(4));
+	        	newUser.setEmail(rs.getString(5));
+	        	authority.setId(rs.getInt(6));
+	        	newUser.setAuthority(ad.findName(authority).getName());
+	        	newUser.setLastTime(rs.getString(7));
+	            userList.add(newUser);
+	        }
+		}finally {
+			rs.close();
+			prepStmt.close();
+			DBConnect.closeDB(con, prepStmt, rs);;
+		}
+		return userList;
 	}
 
 }

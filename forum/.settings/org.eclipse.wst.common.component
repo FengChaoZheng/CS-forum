@@ -2,7 +2,6 @@
     <wb-module deploy-name="forum">
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="context-root" value="forum"/>
         <property name="java-output-path" value="/forum/build/classes"/>
     </wb-module>

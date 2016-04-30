@@ -17,9 +17,20 @@ public class ExitController implements Controller{
 		String userName = (String) session.getAttribute("userName");
 		System.out.println("退出时会话的内容："+userName);
 		
+		String strValue = request.getParameter("value");
+		int value = Integer.parseInt(strValue);
+		
 		session.removeAttribute("userName");
 		
-		return new ModelAndView("redirect:/user/index.jsp");
+		ModelAndView mav = new ModelAndView();
+		switch(value){
+		case 1:
+			mav.setViewName("redirect:/user/index.jsp");
+			break;
+		case 2:
+			mav.setViewName("redirect:/admin/adminLogin.jsp");
+		}
+		return mav;
 	}
 
 }

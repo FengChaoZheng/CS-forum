@@ -9,9 +9,26 @@ import org.springframework.web.servlet.mvc.Controller;
 public class ToLoginController implements Controller{
 
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest arg0,
-			HttpServletResponse arg1) throws Exception {
-		return new ModelAndView("redirect:/user/login.jsp");
+	public ModelAndView handleRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		request.setCharacterEncoding("utf-8");
+		
+		String strValue = request.getParameter("value");
+		int value = Integer.parseInt(strValue);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		switch(value){
+		case 1:
+			mav.setViewName("redirect:/user/login.jsp");
+			break;
+		case 2:
+			mav.setViewName("redirect:/admin/adminLogin.jsp");
+			break;
+		}
+		
+		return mav;
 	}
 
 }

@@ -13,9 +13,9 @@ public class DBConnect {
 	private static String userPwd = "123456";                  //密码
 	private static String dbName = "forum";           //数据库名
 	public static Connection getDBconnection(){
-		String  url1="jdbc:mysql://localhost/"+dbName;
+		String  url1 ="jdbc:mysql://localhost/"+dbName;
 		String  url2 ="?user="+userName+"&password="+userPwd;
-		String  url3="&useUnicode=true&characterEncoding=utf-8";
+		String  url3 ="&useUnicode=true&characterEncoding=utf-8";
 		String  url =url1+url2+url3;
 		try{
 		    Class.forName(driverName);

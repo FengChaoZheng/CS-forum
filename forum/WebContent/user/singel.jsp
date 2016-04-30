@@ -68,7 +68,7 @@ a:active {
 </style>
 <script type="text/javascript">
 function SubmitForm(){	
-	document.form_info.action = "../toIndex.do";
+	document.form_info.action = "../toIndex.do?value=1";
 	document.form_info.submit();	
 }
 </script>

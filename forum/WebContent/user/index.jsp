@@ -94,7 +94,7 @@ function CheckForm(){
 		alert("密码不能为空");
 		document.form_index.loginPassword.focus();
 	}else{
-		document.form_index.action = "../userLogin.do";
+		document.form_index.action = "../userLogin.do?value=0";
 		document.form_index.submit();
 	}
 }
@@ -118,7 +118,7 @@ function CheckForm(){
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332" rowspan="2">
-            <a href="../toIndex.do">
+            <a href="../toIndex.do?value=1">
               <img src="../img/logo.jpg" style="width:150px"/>
             </a>
           </td>
@@ -134,7 +134,7 @@ function CheckForm(){
             <input type="password" name="loginPassword" id="loginPassword" height="25px"/>
             <input type="button" name="login" id="login" value="登录" style="height:25px" onclick="CheckForm()"/>
           </td>
-          <td align="left"><a href="../toRegister.do">注册</a></td>
+          <td align="left"><a href="../toRegister.do?value=1">注册</a></td>
         </tr>
       </table>
       </form>
@@ -151,7 +151,7 @@ function CheckForm(){
           <td align="right" valign="bottom">
           	欢迎<%=session.getAttribute("userName") %>&nbsp;&nbsp;
             <a href="../toSingel.do">个人中心</a>&nbsp;&nbsp;
-            <a href="../exit.do">安全退出</a>
+            <a href="../exit.do?value=1">安全退出</a>
           </td>
         </tr>
       </table>

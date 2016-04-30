@@ -10,14 +10,18 @@
              default-autowire="byName">
   
 	<bean id="user" class="com.forum.model.User"/>
-	<bean id="authority" class="com.forum.model.Authority"></bean>
+	<bean id="authority" class="com.forum.model.Authority"/>
+	<bean id="notice" class="com.forum.model.Notice"/>
   
 	 <bean id="userDaoImp" class="com.forum.dao.UserDaoImp">
 	 	<property name="user" ref="user"/>
+	 	<property name="authority" ref="authority"/>
+	 	<property name="ad" ref="authorityDaoImp"/>
 	 </bean>
 	 <bean id="authorityDaoImp" class="com.forum.dao.AuthorityDaoImp">
 	 	<property name="authority" ref="authority"></property>
 	 </bean>
+	 <bean id="noticeDaoImp" class="com.forum.dao.NoticeDaoImp"></bean>
 	
 	<!-- 将URL直接映射到具体的业务控制器 -->
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -34,14 +38,17 @@
 				<prop key="toSingel.do">toSingel</prop>
 				<prop key="toModifyPwd.do">toModifyPwd</prop>
 				<prop key="modifyPwd.do">modifyPwd</prop>
+				<prop key="listUser.do">listUser</prop>
+				<prop key="listNotice.do">listNotice</prop>
+				<prop key="publishNotice.do">publishNotice</prop>
+				<prop key="publishDocument.do">publishDocument</prop>
+				<prop key="downloadDocument.do">downloadDocument</prop>
 			</props>
 		</property>
 	</bean>
 	<bean id="userRegister" class="com.forum.controller.UserRegisterController" scope="prototype">
 		<property name="ud" ref="userDaoImp"/>
 		<property name="user" ref="user"/>
-		<property name="ad" ref="authorityDaoImp"/>
-		<property name="authority" ref="authority"/>
 	</bean>
 	<bean id="toIndex" class="com.forum.controller.ToIndexController" scope="prototype"></bean>
 	<bean id="userLogin" class="com.forum.controller.UserLoginController" scope="prototype">
@@ -59,6 +66,18 @@
 		<property name="ud" ref="userDaoImp"/>
 		<property name="user" ref="user"/>
 	</bean>
+	<bean id="listUser" class="com.forum.page.ListUserController" scope="prototype">
+		<property name="ud" ref="userDaoImp"></property>
+	</bean>
+	<bean id="listNotice" class="com.forum.page.ListNoticeController" scope="prototype">
+		<property name="nd" ref="noticeDaoImp"></property>
+	</bean>
+	<bean id="publishNotice" class="com.forum.controller.PublishNoticeController" scope="prototype">
+		<property name="notice" ref="notice"></property>
+		<property name="nd" ref="noticeDaoImp"></property>
+	</bean>
+	<bean id="publishDocument" class="com.forum.controller.DocumentPublishController" scope="prototype"/>
+	<bean id="downloadDocument" class="com.forum.controller.DocumentDownloadController" scope="prototype"/>
 	<!-- id的名字必须和HandlerMapping中保持一致。因为我们用的是SimpleUrlHandlerMapping -->
 	
 	<!-- 配置试图解析器 -->
