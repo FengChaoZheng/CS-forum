@@ -11,28 +11,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-import com.forum.dao.AuthorityDao;
 import com.forum.dao.UserDao;
-import com.forum.model.Authority;
 import com.forum.model.User;
 
 public class UserRegisterController implements Controller{
 	
 	private UserDao ud;
 	private User user;
-	private AuthorityDao ad;
-	private Authority authority;
 	public void setUd(UserDao ud) {
 		this.ud = ud;
 	}
 	public void setUser(User user){
 		this.user = user;
-	}
-	public void setAd(AuthorityDao ad){
-		this.ad = ad;
-	}
-	public void setAuthority(Authority authority){
-		this.authority = authority;
 	}
 
 	@Override
@@ -53,16 +43,13 @@ public class UserRegisterController implements Controller{
 		String userAuthority = request.getParameter("authority");
 		System.out.println("authority:"+ userAuthority);
 		
-		authority.setName(userAuthority);
-		//ad.find(authority);
-		
 		if("普通会员".equals(userAuthority)){
 			System.out.println("注册-----普通会员-----------");
 			user.setName(userName);
 			user.setSex(userSex);
 			user.setPassword(userPassword);
 			user.setEmail(userEmail);
-			user.setAuthority(ad.find(authority).getId());
+			user.setAuthority(userAuthority);
 			Date date=new Date();
 			DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time=format.format(date);
@@ -83,7 +70,7 @@ public class UserRegisterController implements Controller{
 			user.setSex(userSex);
 			user.setPassword(userPassword);
 			user.setEmail(userEmail);
-			user.setAuthority(ad.find(authority).getId());
+			user.setAuthority(userAuthority);
 			Date date=new Date();
 			DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time=format.format(date);
@@ -91,7 +78,7 @@ public class UserRegisterController implements Controller{
 			user = ud.create(user);
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("userName", user.getName());
-			return new ModelAndView("redirect:/admin/adminIndex.jsp");
+			return new ModelAndView("redirect:/admin/jsp/adminIndex.jsp");
 		}
 		
 		return new ModelAndView("redirect:/user/register.jsp");

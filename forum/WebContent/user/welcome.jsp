@@ -80,7 +80,7 @@ a:active {
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332" rowspan="2">
-            <a href="toIndex.do">
+            <a href="toIndex.do?value=1">
               <img src="img/logo.jpg" style="width:150px"/>
             </a>
           </td>

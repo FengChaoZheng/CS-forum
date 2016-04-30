@@ -24,7 +24,8 @@ public class AuthorityDaoImp implements AuthorityDao {
 	
 	//id,name
 	private static String INSERT_SQL = "insert into forum_authority values(?,?)";
-	private static String SELECT_SQL = "select * from forum_authority where name=?";
+	private static String SELECT_ID_SQL = "select id from forum_authority where name=?";
+	private static String SELECT_NAME_SQL = "select name from forum_authority where id=?"; 
 	private static String UPDATE_SQL = "update forum_authority set name=? where id=?";
 	private static String DELETE_SQL = "delete from forum_authority where name=?";
 
@@ -52,16 +53,35 @@ public class AuthorityDaoImp implements AuthorityDao {
 	}
 
 	@Override
-	public Authority find(Authority newAuthority) throws Exception {
+	public Authority findId(Authority newAuthority) throws Exception {
 		try {
 	        con=DBConnect.getDBconnection();
-            prepStmt = con.prepareStatement(SELECT_SQL);
+            prepStmt = con.prepareStatement(SELECT_ID_SQL);
             prepStmt.setString(1,newAuthority.getName());
-            System.out.println("find name:"+newAuthority.getName());
+            System.out.println("reference authority name:"+newAuthority.getName());
             rs = prepStmt.executeQuery();
             if (rs.next()){
-            	authority.setId(rs.getInt(1));
-            	authority.setName(rs.getString(2)); 
+            	authority.setId(rs.getInt(1)); 
+            	return authority;
+           }
+      } catch (Exception e) {
+    	  e.printStackTrace();
+      } finally {
+    	     DBConnect.closeDB(con, prepStmt, rs);
+      }
+		return null;
+	}
+	
+	@Override
+	public Authority findName(Authority newAuthority) throws Exception {
+		try {
+	        con=DBConnect.getDBconnection();
+            prepStmt = con.prepareStatement(SELECT_NAME_SQL);
+            prepStmt.setInt(1,newAuthority.getId());
+            System.out.println("reference authority id:"+newAuthority.getId());
+            rs = prepStmt.executeQuery();
+            if (rs.next()){
+            	authority.setName(rs.getString(1)); 
             	return authority;
            }
       } catch (Exception e) {

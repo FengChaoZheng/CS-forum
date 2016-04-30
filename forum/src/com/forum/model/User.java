@@ -7,7 +7,7 @@ public class User {
 	private String sex;
 	private String password;
 	private String email;
-	private int authority;
+	private String authority;
 	private String lastTime;
 	public int getId() {
 		return id;
@@ -39,10 +39,10 @@ public class User {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public int getAuthority() {
+	public String getAuthority() {
 		return authority;
 	}
-	public void setAuthority(int authority) {
+	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
 	public String getLastTime() {

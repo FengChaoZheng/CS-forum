@@ -23,6 +23,15 @@
   	<filter-name>encodingFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+   <filter>
+    <filter-name>adminControl</filter-name>
+    <filter-class>com.forum.filter.AdminLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>adminControl</filter-name>
+    <url-pattern>/admin/jsp/*</url-pattern>
+  </filter-mapping>
 	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

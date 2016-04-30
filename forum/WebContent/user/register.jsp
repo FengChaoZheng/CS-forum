@@ -149,7 +149,7 @@ function checkcodeAvailabe(){
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332">
-            <a href="toIndex.do">
+            <a href="../toIndex.do?value=1">
               <img src="../img/logo.jpg" style="width:150px"/>
             </a>
           </td>
@@ -168,7 +168,7 @@ function checkcodeAvailabe(){
         <table width="100%">
           <tr>
             <td align="left"><b>注册</b></td>
-            <td align="right"><a href="../toLogin.do"><b>已有账号？现在登录</b></a></td>
+            <td align="right"><a href="../toLogin.do?value=1"><b>已有账号？现在登录</b></a></td>
           </tr>
         </table>
       </div>
