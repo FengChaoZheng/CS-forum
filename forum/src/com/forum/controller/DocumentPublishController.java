@@ -18,7 +18,21 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
+import com.forum.dao.DocumentDao;
+import com.forum.model.Document;
+
 public class DocumentPublishController implements Controller{
+	
+	private Document document;
+	private DocumentDao dd;
+
+	public void setDocument(Document document) {
+		this.document = document;
+	}
+
+	public void setDd(DocumentDao dd) {
+		this.dd = dd;
+	}
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
@@ -26,6 +40,8 @@ public class DocumentPublishController implements Controller{
 
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
+		
+		String userName = (String) session.getAttribute("userName");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -83,12 +99,15 @@ public class DocumentPublishController implements Controller{
 				}else{
 					//如果fileitem中封装的是上传文件，得到上传的文件名称
 					String filename = item.getName();
-					System.out.println(filename);
+					System.out.println("得到文件名称："+filename);
+					
 					if(filename == null || filename.trim().equals("")){
 						continue;
 					}
 					//处理获取到的上传文件的文件名的路径部分，只保留文件名部分
 					filename = filename.substring(filename.lastIndexOf("\\")+1);
+					System.out.println("保留部分："+filename);
+					document.setName(filename);//设置Document实体的name属性
 					//得到上传文件的扩展名
 					String fileExtName = filename.substring(filename.lastIndexOf(".")+1);
 					//如果需要限制上传的文件类型，那么可以通过文件的扩展名来判断上传的文件类型是否合法
@@ -97,8 +116,13 @@ public class DocumentPublishController implements Controller{
 					InputStream in = item.getInputStream();
 					//得到文件保存的名称
 					String saveFilename = makeFileName(filename);
+					System.out.println("文件保存的名称："+saveFilename);
 					//得到文件的保存目录
 					String realSavePath = makePath(saveFilename,savePath);
+					System.out.println("文件保存目录："+realSavePath);
+					document.setSavePath(saveFilename);//设置Document实体的savePath属性
+					document.setUserName(userName);//设置Document实体的userName属性
+					
 					//创建一个文件输出流
 					FileOutputStream out = new FileOutputStream(realSavePath +"\\"+saveFilename);
 					//创建一个缓冲区
@@ -110,6 +134,7 @@ public class DocumentPublishController implements Controller{
 						//使用FileOutputStream输出流将缓冲区的数据写入到指定的目录(savePath+"\\"+filename)当中
 						out.write(buffer, 0, len);
 					}
+					dd.upload(document);
 					//关闭输入流
 					in.close();
 					//关闭输出流

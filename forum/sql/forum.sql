@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50523
 File Encoding         : 65001
 
-Date: 2016-04-30 01:12:59
+Date: 2016-05-02 03:58:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,6 +67,7 @@ CREATE TABLE `forum_business` (
 -- ----------------------------
 -- Records of forum_business
 -- ----------------------------
+INSERT INTO `forum_business` VALUES ('1462015151025', '121wesdsfd', '12');
 
 -- ----------------------------
 -- Table structure for forum_content
@@ -74,17 +75,21 @@ CREATE TABLE `forum_business` (
 DROP TABLE IF EXISTS `forum_content`;
 CREATE TABLE `forum_content` (
   `id` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `content` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `content` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `post_time` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `section_id` int(2) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `content_user_id` (`user_id`),
-  CONSTRAINT `content_user_id` FOREIGN KEY (`user_id`) REFERENCES `forum_user` (`id`)
+  KEY `content_section_id` (`section_id`),
+  CONSTRAINT `content_section_id` FOREIGN KEY (`section_id`) REFERENCES `forum_section` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of forum_content
 -- ----------------------------
+INSERT INTO `forum_content` VALUES ('1462131771392', ' 1', '巍', '12', '2016-05-02 03:42:51', '1');
+INSERT INTO `forum_content` VALUES ('1462132594369', '额', '给他我的风格', '12', '2016-05-02 03:56:34', '1');
 
 -- ----------------------------
 -- Table structure for forum_document
@@ -93,16 +98,16 @@ DROP TABLE IF EXISTS `forum_document`;
 CREATE TABLE `forum_document` (
   `id` varchar(255) CHARACTER SET utf8 NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
   `upload_time` varchar(255) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `document_user_id` (`user_id`),
-  CONSTRAINT `document_user_id` FOREIGN KEY (`user_id`) REFERENCES `forum_user` (`id`)
+  `save_path` varchar(255) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of forum_document
 -- ----------------------------
+INSERT INTO `forum_document` VALUES ('1462074290397', '120708.xls', 'op', '2016-05-01 11:44:50', '049ce415-85d9-4254-9e4a-d3decf904975_120708.xls');
 
 -- ----------------------------
 -- Table structure for forum_section
@@ -184,17 +189,20 @@ CREATE TABLE `forum_user` (
   UNIQUE KEY `name_unique` (`name`),
   KEY `user_authority_id` (`authority_id`),
   CONSTRAINT `user_authority_id` FOREIGN KEY (`authority_id`) REFERENCES `forum_authority` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of forum_user
 -- ----------------------------
-INSERT INTO `forum_user` VALUES ('1', '12', '男', 'wzNncBURtPYCDsYd7TUgWQ==', '123@12.com', '1', '2016-04-28 18:59:39');
+INSERT INTO `forum_user` VALUES ('1', '12', '男', 'wzNncBURtPYCDsYd7TUgWQ==', '123@12.com', '1', '2016-05-02 03:56:05');
 INSERT INTO `forum_user` VALUES ('2', '知识', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123@123.com', '1', '2016-04-28 19:36:56');
 INSERT INTO `forum_user` VALUES ('3', '方式', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123@123.com', '1', '2016-04-28 19:49:09');
 INSERT INTO `forum_user` VALUES ('4', '打扰', '女', '4QrcOUm6Wau+VuBX8g+IPg==', '1234@111.com', '1', '2016-04-28 19:56:37');
 INSERT INTO `forum_user` VALUES ('5', 'et', '女', '4QrcOUm6Wau+VuBX8g+IPg==', 'et@163.com', '1', '2016-04-29 00:32:01');
 INSERT INTO `forum_user` VALUES ('6', '给他', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@12.com', '1', '2016-04-30 00:49:41');
 INSERT INTO `forum_user` VALUES ('7', '虎牙', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@22.com', '1', '2016-04-30 00:52:17');
-INSERT INTO `forum_user` VALUES ('8', '考研', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@12.com', '1', '2016-04-30 00:57:12');
-INSERT INTO `forum_user` VALUES ('9', '一条', '女', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@123.com', '3', '2016-04-30 01:12:26');
+INSERT INTO `forum_user` VALUES ('8', '考研', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@12.com', '1', '2016-04-30 16:24:02');
+INSERT INTO `forum_user` VALUES ('9', '一条', '女', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@123.com', '3', '2016-04-30 11:39:53');
+INSERT INTO `forum_user` VALUES ('10', 'op', '女', '4QrcOUm6Wau+VuBX8g+IPg==', 'op@163.com', '3', '2016-05-01 11:28:08');
+INSERT INTO `forum_user` VALUES ('11', 'hy', '男', '4QrcOUm6Wau+VuBX8g+IPg==', 'hy@123.com', '3', '2016-04-30 14:32:42');
+INSERT INTO `forum_user` VALUES ('12', 'iu', '男', '4QrcOUm6Wau+VuBX8g+IPg==', 'iu@123.com', '3', '2016-05-01 19:04:11');
