@@ -34,22 +34,21 @@ a:active {
 		<table width="100%"
 			style="border-bottom-width: 1; border-bottom-style: solid">
 			<tr>
-				<td width="50%"><a href="../../toIndex.do?value=2"
-					target="_parent"><img src="../../img/logo.jpg" width="165"
+				<td rowspan="2" width="50%"><a href="<%=request.getContextPath() %>/toIndex.do?value=2"
+					target="_parent"><img src="<%=request.getContextPath() %>/img/logo.jpg" width="165"
 						height="65" />
 				</a>
 				</td>
-				<%
-					if (session.getAttribute("userName") != null) {
-				%>
-				<td width="50%" align="right" valign="bottom"><font
-					style="font-size: 20px; padding-right: 15px">${userName}&nbsp;&nbsp;<a
-						href="../../exit.do?value=2" target="_parent">安全退出</a>
+				<td width="50%" align="right" valign="bottom">
+					<a href="<%=request.getContextPath() %>/toRegister.do?value=2" target="_parent"><b>申请新的管理员账号</b></a>&nbsp;&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td width="50%" align="right" valign="bottom">
+					<font style="font-size: 20px; padding-right: 15px">${userName}&nbsp;&nbsp;
+					<a href="<%=request.getContextPath() %>/exit.do?value=2" target="_parent">安全退出</a>
 				</font>
 				</td>
-				<%
-					}
-				%>
 			</tr>
 		</table>
 	</div>

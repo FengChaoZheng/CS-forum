@@ -75,7 +75,7 @@ function checkForm(){
 	  alert("密码长度应该大于等于6并且小于等于12");
 	  document.form_login.password.focus();
 	}else{
-	  document.form_login.action = "../userLogin.do?value=2";
+	  document.form_login.action = "<%=request.getContextPath() %>/userLogin.do?value=2";
 	  document.form_login.submit();	
 	}
 }
@@ -97,8 +97,8 @@ function checkForm(){
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332">
-            <a href="../toIndex.do">
-              <img src="../img/logo.jpg" style="width:150px"/>
+            <a href="<%=request.getContextPath() %>/toIndex.do?value=2">
+              <img src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/>
             </a>
           </td>
         </tr>
@@ -114,7 +114,6 @@ function checkForm(){
         <table width="100%">
           <tr>
             <td align="left"><b>登录</b></td>
-            <td align="right"><a href="../toRegister.do?value=2"><b>没有账号？注册</b></a></td>
           </tr>
         </table>
       </div>

@@ -5,67 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>他山之石--登录页</title>
-<style type="text/css">
-a:link{text-decoration:none;}
-a:visited {
- text-decoration: none;
-}
-a:hover {
- text-decoration: none;
-}
-a:active {
- text-decoration: none;
-}
-.div_main {
-	background-color: #FFFFFF;
-	text-align: center;
-	vertical-align: middle;
-	width: 100%;
-}
-.div_collect{
-	background-color: #CCC;
-}
-.div_collect_content {
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-	padding-bottom: 5px;
-	padding-top: 5px;
-}
-.div_logo{
-	background-color: #FFF;
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-}
-.table_logo{
-	vertical-align: middle;
-	width: 100%;
-}
-.div_bottom {
-	background-color: #CCC;
-	margin-top: 20px;
-	padding: 5px;
-}
-.div_sub {
-	margin-right: 15%;
-	margin-left: 15%;
-	text-align: center;
-	padding-bottom:200px;
-}
-.div_sub_title {
-	background-color: #66ffff;
-	padding-bottom:3px;
-	padding-top:3px;
-	border-left-style:solid;
-	border-right-style:solid;
-	border-left-width:thin;
-	border-right-width:thin;
-	margin-bottom:200px;
-}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/foreground.css"/>
 <script language="javascript">
 function checkForm(){	
     if(document.form_login.name.value==""){
@@ -75,7 +15,7 @@ function checkForm(){
 	  alert("密码长度应该大于等于6并且小于等于12");
 	  document.form_login.password.focus();
 	}else{
-	  document.form_login.action = "../userLogin.do?value=1";
+	  document.form_login.action = "<%=request.getContextPath() %>/userLogin.do?value=1";
 	  document.form_login.submit();	
 	}
 }
@@ -97,8 +37,8 @@ function checkForm(){
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332">
-            <a href="../toIndex.do?value=1">
-              <img src="../img/logo.jpg" style="width:150px"/>
+            <a href="<%=request.getContextPath() %>/toIndex.do?value=1">
+              <img src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/>
             </a>
           </td>
         </tr>
@@ -109,17 +49,17 @@ function checkForm(){
   
   <div class="div_center">
   
-    <div class="div_sub">
+    <div class="div_sub" style="height: 560px;">
       <div class="div_sub_title">
         <table width="100%">
           <tr>
             <td align="left"><b>登录</b></td>
-            <td align="right"><a href="../toRegister.do?value=1"><b>没有账号？注册</b></a></td>
+            <td align="right"><a href="<%=request.getContextPath() %>/toRegister.do?value=1"><b>没有账号？注册</b></a></td>
           </tr>
         </table>
       </div>
       <form id="form_login" name="form_login" method="post">
-      <table align="center">
+      <table align="center" style="margin-top: 200px;">
         <tr>
           <td width="25%" height="30px" align="right">用户名：</td>
           <td width="75%" align="left">

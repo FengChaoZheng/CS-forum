@@ -5,8 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>无标题文档</title>
-<link rel="stylesheet" href="../../css/menuLink.css"/>
-<script src="../../js/menuLink.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/menuLink.css"/>
+<script src="<%=request.getContextPath() %>/js/menuLink.js"></script>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
   <tr>
     <td><div> <a href="menu1.html" class="menuLink">用户管理</a>
       <ul class="menu" id="menu1">
-        <li><a href="../../listUser.do" target="mainFrame">查看用户</a></li>
+        <li><a href="<%=request.getContextPath() %>/listUser.do" target="mainFrame">查看用户</a></li>
         <li><a href="" target="mainFrame">权限管理</a></li>
         </ul>
     </div></td>
@@ -41,7 +41,7 @@
     <td><div> <a href="menu4.html" class="menuLink">事务管理</a>
       <ul class="menu" id="menu4">
         <li><a href="adminNoticePublish.jsp" target="mainFrame">发布公告</a></li>
-        <li><a href="../../listNotice.do" target="mainFrame">删除公告</a></li>
+        <li><a href="<%=request.getContextPath() %>/listNotice.do" target="mainFrame">删除公告</a></li>
         <li><a href="" target="mainFrame">添加友链</a></li>
         <li><a href="" target="mainFrame">删除友链</a></li>
         </ul>

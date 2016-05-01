@@ -5,72 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>他山之石--密码修改页</title>
-<style type="text/css">
-a:link{
-	text-decoration:none;
-}
-a:visited {
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: none;
-}
-a:active {
-	text-decoration: none;
-}
-.div_main {
-	background-color: #FFFFFF;
-	text-align: center;
-	vertical-align: middle;
-	width: 100%;
-}
-.div_collect{
-	background-color: #CCC;
-}
-.div_collect_content {
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-	padding-bottom: 5px;
-	padding-top: 5px;
-}
-.div_logo{
-	background-color: #FFF;
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-}
-.table_logo{
-	vertical-align: middle;
-	width: 100%;
-}
-.div_bottom {
-	background-color: #CCC;
-	margin-top: 20px;
-	padding: 5px;
-}
-.div_sub {
-	margin-right: 15%;
-	margin-left: 15%;
-	text-align: center;
-	padding-bottom:200px;
-}
-.div_sub_title {
-	background-color: #66ffff;
-	padding-bottom:3px;
-	padding-top:3px;
-	border-left-style:solid;
-	border-right-style:solid;
-	border-left-width:thin;
-	border-right-width:thin;
-	margin-bottom:200px;
-}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/foreground.css"/>
 <script type="text/javascript">
 function SubmitForm(){	
-	document.form_modify.action = "modifyPwd.do";
+	document.form_modify.action = "<%=request.getContextPath()%>/modifyPwd.do";
 	document.form_modify.submit();	
 }
 function availablePwd(){
@@ -112,7 +50,7 @@ function checkPwd(){
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332">
-            <input type="image" name="logo" id="logo" src="img/logo.jpg" style="width:150px"/>
+            <input type="image" name="logo" id="logo" src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/>
           </td>
         </tr>       
       </table>
@@ -122,16 +60,16 @@ function checkPwd(){
   
   <div class="div_center">
   <form id="form_modify" name="form_modify" method="post">
-    <div class="div_sub">
+    <div class="div_sub" style="height: 560px;">
       <div class="div_sub_title">
         <table width="100%">
           <tr>
             <td align="left"><b>修改密码</b></td>
-            <td colspan="3" align="right"><a href="user/singel.jsp"><b>返回个人中心</b></a></td>
+            <td colspan="3" align="right"><a href="<%=request.getContextPath() %>/user/singel.jsp"><b>返回个人中心</b></a></td>
           </tr>
         </table>
       </div>
-      <table align="center">
+      <table align="center" style="margin-top: 200px;">
         <tr>
           <td width="127" height="30px" align="right">新密码：</td>
           <td colspan="3" align="left">

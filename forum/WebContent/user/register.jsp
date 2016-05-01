@@ -7,69 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>他山之石--注册页</title>
-<style type="text/css">
-a:link{
-    text-decoration:none;
-}
-a:visited {
-    text-decoration: none;
-}
-a:hover {
-   text-decoration: none;
-}
-a:active {
-    text-decoration: none;
-}
-.div_main {
-	background-color: #FFFFFF;
-	text-align: center;
-	vertical-align: middle;
-	width: 100%;
-}
-.div_collect{
-	background-color: #CCC;
-}
-.div_collect_content {
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-	padding-bottom: 5px;
-	padding-top: 5px;
-}
-.div_logo{
-	background-color: #FFF;
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-}
-.table_logo{
-	vertical-align: middle;
-	width: 100%;
-}
-.div_bottom {
-	background-color: #CCC;
-	margin-top: 20px;
-	padding: 5px;
-}
-.div_sub {
-	margin-right: 15%;
-	margin-left: 15%;
-	text-align: center;
-	padding-bottom:200px;
-}
-.div_sub_title {
-	background-color: #66ffff;
-	padding-bottom:3px;
-	padding-top:3px;
-	border-left-style:solid;
-	border-right-style:solid;
-	border-left-width:thin;
-	border-right-width:thin;
-	margin-bottom:200px;
-}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/foreground.css"/>
 <script type="text/javascript">
 function SubmitForm(){	
     if(document.form_register.username.value==""){
@@ -83,7 +21,7 @@ function SubmitForm(){
 	  document.form_register.email.focus();
 	}else{
 	  alert(document.form_register.authority.value);
-	  document.form_register.action = "../userRegister.do";
+	  document.form_register.action = "<%=request.getContextPath()%>/userRegister.do";
 	  document.form_register.submit();	
 	}
 }
@@ -124,7 +62,7 @@ function passwordAvailable(){
 }
 function checkcodeAvailabe(){
 	var cd = document.form_register.checkcode.value;
-	var str = <%=session.getAttribute("checkCode")%>;
+	var str = ${checkCode}
 	if(cd==str){
 		alert("验证码不正确");
 		document.form_register.checkcode.value="";
@@ -149,8 +87,8 @@ function checkcodeAvailabe(){
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332">
-            <a href="../toIndex.do?value=1">
-              <img src="../img/logo.jpg" style="width:150px"/>
+            <a href="<%=request.getContextPath() %>/toIndex.do?value=1">
+              <img src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/>
             </a>
           </td>
           
@@ -163,16 +101,16 @@ function checkcodeAvailabe(){
   
   <div class="div_center">
   <form id="form_register" name="form_register" method="post">
-    <div class="div_sub">
+    <div class="div_sub" style="height: 560px;">
       <div class="div_sub_title">
         <table width="100%">
           <tr>
             <td align="left"><b>注册</b></td>
-            <td align="right"><a href="../toLogin.do?value=1"><b>已有账号？现在登录</b></a></td>
+            <td align="right"><a href="<%=request.getContextPath() %>/toLogin.do?value=1"><b>已有账号？现在登录</b></a></td>
           </tr>
         </table>
       </div>
-      <table align="center">
+      <table align="center" style="margin-top: 150px;">
         <tr>
           <td width="92" height="30px" align="right">用户名：</td>
           <td colspan="3" align="left">
@@ -206,10 +144,10 @@ function checkcodeAvailabe(){
             <input name="checkcode" type="text" id="checkcode" onblur="checkcodeAvailabe()"/>
           </td>
           <td width="66px">
-            <img border="0" src="../checkcode.do"/>
+            <img border="0" src="<%=request.getContextPath() %>/checkcode.do"/>
           </td>
           <td width="65">
-            <a href="../changeCheckcode.do">
+            <a href="<%=request.getContextPath() %>/changeCheckcode.do">
               <input name="changeCheckcode" type="button" id="changeCheckcode" value="换一换"/>
             </a>
           </td>

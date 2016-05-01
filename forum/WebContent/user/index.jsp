@@ -5,85 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>他山之石--首页</title>
-<style type="text/css">
-a:link{text-decoration:none;}
-a:visited {
- text-decoration: none;
-}
-a:hover {
- text-decoration: none;
-}
-a:active {
- text-decoration: none;
-}
-.div_main {
-	background-color: #FFFFFF;
-	text-align: center;
-	vertical-align: middle;
-	width: 100%;
-}
-.div_collect{
-	background-color: #CCC;
-}
-.div_collect_content {
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-	padding-bottom: 5px;
-	padding-top: 5px;
-}
-.div_logo{
-	background-color: #FFF;
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-}
-.table_logo{
-	vertical-align: middle;
-	width: 100%;
-}
-.div_bottom {
-	background-color: #CCC;
-	margin-top: 20px;
-	padding: 5px;
-}
-.div_sub {
-	margin-right: 15%;
-	margin-left: 15%;
-}
-.div_sub_title {
-	background-color: #66ffff;
-	text-align: left;
-	padding-bottom:3px;
-	padding-top:3px;
-	border-left-style:solid;
-	border-right-style:solid;
-	border-left-width:thin;
-	border-right-width:thin;
-}
-.div_sub_content{
-	border-left-style:solid;
-	border-right-style:solid;
-	border-left-width:thin;
-	border-right-width:thin;
-}
-.div_sub_content_last{
-	border-left-style:solid;
-	border-right-style:solid;
-	border-left-width:thin;
-	border-right-width:thin;
-	border-bottom-style:solid;
-	border-bottom-width:thin;
-}
-.table_content{
-	vertical-align: middle;
-	width: 100%;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-</style>
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/foreground.css"/>
 
 <script language="javascript">
 function CheckForm(){
@@ -94,7 +17,7 @@ function CheckForm(){
 		alert("密码不能为空");
 		document.form_index.loginPassword.focus();
 	}else{
-		document.form_index.action = "../userLogin.do?value=0";
+		document.form_index.action = "<%=request.getContextPath()%>/userLogin.do?value=0";
 		document.form_index.submit();
 	}
 }
@@ -118,8 +41,8 @@ function CheckForm(){
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332" rowspan="2">
-            <a href="../toIndex.do?value=1">
-              <img src="../img/logo.jpg" style="width:150px"/>
+            <a href="<%=request.getContextPath() %>/toIndex.do?value=1">
+              <img src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/>
             </a>
           </td>
           <td width="142" height="34" align="right" valign="middle">用户名：</td>
@@ -134,7 +57,7 @@ function CheckForm(){
             <input type="password" name="loginPassword" id="loginPassword" height="25px"/>
             <input type="button" name="login" id="login" value="登录" style="height:25px" onclick="CheckForm()"/>
           </td>
-          <td align="left"><a href="../toRegister.do?value=1">注册</a></td>
+          <td align="left"><a href="<%=request.getContextPath() %>/toRegister.do?value=1">注册</a></td>
         </tr>
       </table>
       </form>
@@ -143,15 +66,15 @@ function CheckForm(){
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332" rowspan="2">
-            <input type="image" name="logo" id="logo" src="../img/logo.jpg" style="width:150px"/>
+            <input type="image" name="logo" id="logo" src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/>
           </td>
           
         </tr>
         <tr>
           <td align="right" valign="bottom">
           	欢迎<%=session.getAttribute("userName") %>&nbsp;&nbsp;
-            <a href="../toSingel.do">个人中心</a>&nbsp;&nbsp;
-            <a href="../exit.do?value=1">安全退出</a>
+            <a href="<%=request.getContextPath() %>/toSingle.do">个人中心</a>&nbsp;&nbsp;
+            <a href="<%=request.getContextPath() %>/exit.do?value=1">安全退出</a>
           </td>
         </tr>
       </table>
@@ -166,7 +89,7 @@ function CheckForm(){
       <div class="div_sub_content">
         <table width="200" border="0" class="table_content">
           <tr>
-            <td align="center" valign="middle" width="25%"><a href="">数据结构</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=计算机专业课">数据结构</a></td>
             <td align="center" valign="middle" width="25%"><a href="">操作系统</a></td>
             <td align="center" valign="middle" width="25%"><a href="">计算机网络</a></td>
             <td align="center" valign="middle" width="25%"><a href="">计算机组成原理</a></td>
@@ -205,7 +128,7 @@ function CheckForm(){
       <div class="div_sub_content">
         <table width="200" border="0" class="table_content">
           <tr>
-            <td align="center" valign="middle" width="25%"><a href="">视频资料</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listDocument.do">视频资料</a></td>
             <td align="center" valign="middle" width="25%"><a href="">历年真题</a></td>
             <td align="center" valign="middle" width="25%"><a href=""></a></td>
             <td align="center" valign="middle" width="25%"><a href=""></a></td>

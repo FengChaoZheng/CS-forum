@@ -5,72 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>他山之石--密码成功修改页</title>
-<style type="text/css">
-a:link{
-	text-decoration:none;
-}
-a:visited {
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: none;
-}
-a:active {
-	text-decoration: none;
-}
-.div_main {
-	background-color: #FFFFFF;
-	text-align: center;
-	vertical-align: middle;
-	width: 100%;
-}
-.div_collect{
-	background-color: #CCC;
-}
-.div_collect_content {
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-	padding-bottom: 5px;
-	padding-top: 5px;
-}
-.div_logo{
-	background-color: #FFF;
-	text-align: left;
-	vertical-align: middle;
-	margin-right: 15%;
-	margin-left: 15%;
-}
-.table_logo{
-	vertical-align: middle;
-	width: 100%;
-}
-.div_bottom {
-	background-color: #CCC;
-	margin-top: 20px;
-	padding: 5px;
-}
-.div_sub {
-	margin-right: 15%;
-	margin-left: 15%;
-	text-align: center;
-	padding-bottom:200px;
-}
-.div_sub_title {
-	background-color: #66ffff;
-	padding-bottom:3px;
-	padding-top:3px;
-	border-left-style:solid;
-	border-right-style:solid;
-	border-left-width:thin;
-	border-right-width:thin;
-	margin-bottom:200px;
-}
-</style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/foreground.css"/>
 <script type="text/javascript">
 function SubmitForm(){	
-	document.form_modifySuccess.action = "toLogin.do";
+	document.form_modifySuccess.action = "<%=request.getContextPath()%>/toLogin.do";
 	document.form_modifySuccess.submit();	
 }
 </script>
@@ -91,7 +29,7 @@ function SubmitForm(){
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332">
-            <input type="image" name="logo" id="logo" src="img/logo.jpg" style="width:150px"/>
+            <input type="image" name="logo" id="logo" src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/>
           </td>
         </tr>       
       </table>
@@ -101,7 +39,7 @@ function SubmitForm(){
   
   <div class="div_center">
   <form id="form_modifySuccess" name="form_modifySuccess" method="post">
-    <div class="div_sub">
+    <div class="div_sub" style="height: 560px;">
       <div class="div_sub_title">
         <table width="100%">
           <tr>
@@ -109,9 +47,9 @@ function SubmitForm(){
           </tr>
         </table>
       </div>
-      <table align="center">
+      <table align="center" width="100%" height="100%">
         <tr>
-          <td colspan="3" align="left" valign="middle">
+          <td colspan="3" align="center" valign="middle">
           	恭喜您密码修改成功！&nbsp;&nbsp;<input type="button" name="modify" id="return" value="点击重新登录" onclick="SubmitForm()"/>
           </td>
         </tr>

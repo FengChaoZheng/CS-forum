@@ -12,6 +12,9 @@
 	<bean id="user" class="com.forum.model.User"/>
 	<bean id="authority" class="com.forum.model.Authority"/>
 	<bean id="notice" class="com.forum.model.Notice"/>
+	<bean id="document" class="com.forum.model.Document"/>
+	<bean id="section" class="com.forum.model.Section"/>
+	<bean id="content" class="com.forum.model.Content"/>
   
 	 <bean id="userDaoImp" class="com.forum.dao.UserDaoImp">
 	 	<property name="user" ref="user"/>
@@ -22,6 +25,11 @@
 	 	<property name="authority" ref="authority"></property>
 	 </bean>
 	 <bean id="noticeDaoImp" class="com.forum.dao.NoticeDaoImp"></bean>
+	 <bean id="documentDaoImp" class="com.forum.dao.DocumentDaoImp"></bean>
+	 <bean id="sectionDaoImp" class="com.forum.dao.SectionDaoImp"></bean>
+	 <bean id="contentDaoImp" class="com.forum.dao.ContentDaoImp">
+	 	<property name="sd" ref="sectionDaoImp"></property>
+	 </bean>
 	
 	<!-- 将URL直接映射到具体的业务控制器 -->
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -43,6 +51,9 @@
 				<prop key="publishNotice.do">publishNotice</prop>
 				<prop key="publishDocument.do">publishDocument</prop>
 				<prop key="downloadDocument.do">downloadDocument</prop>
+				<prop key="listDocument.do">listDocument</prop>
+				<prop key="listContent.do">listContent</prop>
+				<prop key="publishContent.do">publishContent</prop>
 			</props>
 		</property>
 	</bean>
@@ -76,8 +87,22 @@
 		<property name="notice" ref="notice"></property>
 		<property name="nd" ref="noticeDaoImp"></property>
 	</bean>
-	<bean id="publishDocument" class="com.forum.controller.DocumentPublishController" scope="prototype"/>
+	<bean id="publishDocument" class="com.forum.controller.DocumentPublishController" scope="prototype">
+		<property name="document" ref="document"></property>
+		<property name="dd" ref="documentDaoImp"></property>
+	</bean>
 	<bean id="downloadDocument" class="com.forum.controller.DocumentDownloadController" scope="prototype"/>
+	<bean id="listDocument" class="com.forum.page.ListDocumentController" scope="prototype">
+		<property name="dd" ref="documentDaoImp"></property>
+	</bean>
+	<bean id="listContent" class="com.forum.page.ListContentController" scope="prototype">
+		<property name="cd" ref="contentDaoImp"></property>
+		<property name="sd" ref="sectionDaoImp"></property>
+	</bean>
+	<bean id="publishContent" class="com.forum.controller.PublishContentController" scope="prototype">
+		<property name="content" ref="content"></property>
+		<property name="cd" ref="contentDaoImp"></property>
+	</bean>
 	<!-- id的名字必须和HandlerMapping中保持一致。因为我们用的是SimpleUrlHandlerMapping -->
 	
 	<!-- 配置试图解析器 -->
