@@ -82,14 +82,14 @@ a:active {
 
 table.table_document td {
 	width: 150px;
-	border: 2px solid gray;
+	border-bottom: 1px solid gray;
 	text-align: center;
 	padding: 2px 10px;
 }
 
 table.table_document th {
 	width: 150px;
-	border: 2px solid gray;
+	border-bottom: 1px solid gray;
 	text-align: center;
 	padding: 2px 10px;
 }

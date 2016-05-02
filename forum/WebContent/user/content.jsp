@@ -9,7 +9,12 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/foreground.css">
 <script type="text/javascript">
 function checkForm(){
-	if(document.form_content.title.value==""){
+	var str = "${userName}";
+	if(str == ""){
+		alert("请先登录！！！");
+		document.form_content.action="<%=request.getContextPath()%>/toLogin.do?value=1";
+		document.form_content.submit();
+	}else if(document.form_content.title.value==""){
 		alert("请输入标题！！");
 		document.form_content.title.focus();
 		return false;
@@ -36,7 +41,9 @@ function checkForm(){
       <form id="form_logo" name="form_logo" method="post" action="">
         <table width="327" border="0" class="table_logo">
           <tr>
-            <td width="332"><input type="image" name="logo" id="logo" src="<%= request.getContextPath() %>/img/logo.jpg" style="width:150px"/></td>
+            <td width="332"><a href="<%=request.getContextPath() %>/toIndex.do?value=1">
+              <img src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/>
+            </a></td>
           </tr>
         </table>
       </form>
@@ -47,7 +54,7 @@ function checkForm(){
       <div class="div_sub_title">
         <table width="100%">
           <tr>
-            <td align="left"><b>计算机专业课</b></td>
+            <td align="left"><b>${sectionName}</b></td>
             <td colspan="3" align="right"><a href="<%= request.getContextPath() %>/toIndex.do?value=1"><b>返回首页</b></a></td>
           </tr>
         </table>
@@ -56,16 +63,18 @@ function checkForm(){
         共有${pageCount}页，这是第${pageNo}页。
         <c:if test="${pageNo>1}"> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=1">第一页</a> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=${pageNo-1}">上一页</a> </c:if>
         <c:if test="${pageNo!=pageCount}"> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=${pageNo+1}">下一页</a> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=${pageCount}">最后一页</a> </c:if>
-        <table width="100%">
+        <table class="table_document">
           <tr>
             <th>发帖人</th>
             <th>标题</th>
+            <th>内容</th>
             <th>发布时间</th>
           </tr>
           <c:forEach items="${contentlist}" var="content" >
             <tr>
               <td>${content.userName}</td>
               <td>${content.title}</td>
+              <td>${content.message}</td>
               <td>${content.postTime}</td>
             </tr>
           </c:forEach>
@@ -87,8 +96,13 @@ function checkForm(){
                 <td align="left" valign="middle"><input type="text" name="title" id="title"/></td>
             </tr>
             <tr>
+            	<%if(session.getAttribute("userName") != null){ %>
             	<td align="right" valign="top">内容：</td>
                 <td align="left" valign="top"><textarea name="message" id="message" cols="50" rows="6"></textarea></td>
+                <%}else{ %>
+                <td align="right" valign="top">内容：</td>
+                <td align="left" valign="top"><textarea name="message" id="message" cols="50" rows="6"></textarea></td>
+                <%} %>
             </tr>
             <tr>
             	<td></td>

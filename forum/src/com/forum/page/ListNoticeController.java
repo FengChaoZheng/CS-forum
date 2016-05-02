@@ -29,6 +29,9 @@ public class ListNoticeController implements Controller{
 			pageNo = Integer.parseInt(strPageNo); // 把字符串转换成数字
 		}
 
+		String strValue = request.getParameter("value");
+		int value = Integer.parseInt(strValue);
+		
 		ModelAndView mav = new ModelAndView();
 
 		try {
@@ -40,7 +43,16 @@ public class ListNoticeController implements Controller{
 			Integer pageCount = new Integer(nd.getPageCount());
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("pageNo", pageNo);
-			mav.setViewName("admin/jsp/adminNoticeInfo");
+			
+			switch(value){
+			case 1:
+				mav.setViewName("user/notice");
+				break;
+			case 2:
+				mav.setViewName("admin/jsp/adminNoticeInfo");
+				break;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

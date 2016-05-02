@@ -28,6 +28,9 @@ public class ListDocumentController implements Controller{
 		if (strPageNo != null) {
 			pageNo = Integer.parseInt(strPageNo); // 把字符串转换成数字
 		}
+		
+		String strValue = request.getParameter("value");
+		int value = Integer.parseInt(strValue);
 
 		ModelAndView mav = new ModelAndView();
 
@@ -40,7 +43,15 @@ public class ListDocumentController implements Controller{
 			Integer pageCount = new Integer(dd.getPageCount());
 			request.setAttribute("pageCount", pageCount);
 			request.setAttribute("pageNo", pageNo);
-			mav.setViewName("redirect:/user/download.jsp");
+			
+			switch(value){
+			case 1:
+				mav.setViewName("/user/download");
+				break;
+			case 2:
+				mav.setViewName("/admin/jsp/adminDocumentInfo");
+				break;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

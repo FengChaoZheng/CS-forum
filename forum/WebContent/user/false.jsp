@@ -25,7 +25,8 @@
       <table width="327" border="0" class="table_logo">
         <tr>
           <td width="332">
-            <input type="image" name="logo" id="logo" src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/>
+            <a href="<%=request.getContextPath() %>/toIndex.do?value=1">
+              <img src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/></a>
           </td>
           
         </tr>
@@ -42,7 +43,7 @@
         <table width="100%">
           <tr>
             <td align="left"><b>资料下载</b></td>
-            <td colspan="3" align="right"><a href="<%=request.getContextPath()%>/toIndex.do"><b>返回首页</b></a></td>
+            <td colspan="3" align="right"><a href="<%=request.getContextPath() %>/toIndex.do?value=1"><b>返回首页</b></a></td>
           </tr>
         </table>
       </div>

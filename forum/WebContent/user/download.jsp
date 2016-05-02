@@ -22,8 +22,8 @@
 				<form id="form_logo" name="form_logo" method="post" action="">
 					<table width="327" border="0" class="table_logo">
 						<tr>
-							<td width="332" align="left"><input type="image" name="logo" id="logo"
-								src="../img/logo.jpg" style="width: 150px" />
+							<td width="332" align="left"><a href="<%=request.getContextPath() %>/toIndex.do?value=1">
+              <img src="<%=request.getContextPath() %>/img/logo.jpg" style="width:150px"/></a>
 							</td>
 
 						</tr>
@@ -40,7 +40,7 @@
 						<table width="100%">
 							<tr>
 								<td align="left"><b>资料下载</b></td>
-								<td colspan="3" align="right"><a href="index.html"><b>返回首页</b>
+								<td colspan="3" align="right"><a href="<%=request.getContextPath() %>/toIndex.do?value=1"><b>返回首页</b>
 								</a></td>
 							</tr>
 						</table>
@@ -50,12 +50,12 @@
 						<h2>所有下载信息</h2>
       共有${pageCount}页，这是第${pageNo}页。
       <c:if test="${pageNo>1}">
-							<a href="listDocument.do?pageNo=1">第一页</a>
-							<a href="listDocument.do?pageNo=${pageNo-1}">上一页</a>
+							<a href="listDocument.do?pageNo=1&value=1">第一页</a>
+							<a href="listDocument.do?pageNo=${pageNo-1}&value=1">上一页</a>
 						</c:if>
 						<c:if test="${pageNo!=pageCount}">
-							<a href="listDocument.do?pageNo=${pageNo+1}">下一页</a>
-							<a href="listDocument.do?pageNo=${pageCount}">最后一页</a>
+							<a href="listDocument.do?pageNo=${pageNo+1}&value=1">下一页</a>
+							<a href="listDocument.do?pageNo=${pageCount}&value=1">最后一页</a>
 						</c:if>
 						<table class="table_document">
 							<tr>

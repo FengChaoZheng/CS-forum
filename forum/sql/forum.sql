@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50523
 File Encoding         : 65001
 
-Date: 2016-05-02 03:58:30
+Date: 2016-05-03 01:06:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -108,6 +108,7 @@ CREATE TABLE `forum_document` (
 -- Records of forum_document
 -- ----------------------------
 INSERT INTO `forum_document` VALUES ('1462074290397', '120708.xls', 'op', '2016-05-01 11:44:50', '049ce415-85d9-4254-9e4a-d3decf904975_120708.xls');
+INSERT INTO `forum_document` VALUES ('1462157460093', '简历.docx', 'op', '2016-05-02 10:51:00', 'c5eff90a-b93e-45b3-a50a-0f31dbbca089_简历.docx');
 
 -- ----------------------------
 -- Table structure for forum_section
@@ -203,6 +204,6 @@ INSERT INTO `forum_user` VALUES ('6', '给他', '男', '4QrcOUm6Wau+VuBX8g+IPg==
 INSERT INTO `forum_user` VALUES ('7', '虎牙', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@22.com', '1', '2016-04-30 00:52:17');
 INSERT INTO `forum_user` VALUES ('8', '考研', '男', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@12.com', '1', '2016-04-30 16:24:02');
 INSERT INTO `forum_user` VALUES ('9', '一条', '女', '4QrcOUm6Wau+VuBX8g+IPg==', '123456@123.com', '3', '2016-04-30 11:39:53');
-INSERT INTO `forum_user` VALUES ('10', 'op', '女', '4QrcOUm6Wau+VuBX8g+IPg==', 'op@163.com', '3', '2016-05-01 11:28:08');
+INSERT INTO `forum_user` VALUES ('10', 'op', '女', '4QrcOUm6Wau+VuBX8g+IPg==', 'op@163.com', '3', '2016-05-02 12:55:06');
 INSERT INTO `forum_user` VALUES ('11', 'hy', '男', '4QrcOUm6Wau+VuBX8g+IPg==', 'hy@123.com', '3', '2016-04-30 14:32:42');
-INSERT INTO `forum_user` VALUES ('12', 'iu', '男', '4QrcOUm6Wau+VuBX8g+IPg==', 'iu@123.com', '3', '2016-05-01 19:04:11');
+INSERT INTO `forum_user` VALUES ('12', 'iu', '男', '4QrcOUm6Wau+VuBX8g+IPg==', 'iu@123.com', '3', '2016-05-02 11:50:38');

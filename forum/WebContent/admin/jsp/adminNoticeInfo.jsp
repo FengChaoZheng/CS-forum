@@ -21,12 +21,12 @@
       <h2>所有公告信息</h2>
       共有${pageCount}页，这是第${pageNo}页。
       <c:if test="${pageNo>1}">
-         <a href="listNotice.do?pageNo=1">第一页</a>
-         <a href="listNotice.do?pageNo=${pageNo-1}">上一页</a>
+         <a href="listNotice.do?pageNo=1&value=2">第一页</a>
+         <a href="listNotice.do?pageNo=${pageNo-1}&value=2">上一页</a>
       </c:if>
       <c:if test="${pageNo!=pageCount}">
-         <a href="listNotice.do?pageNo=${pageNo+1}">下一页</a>
-         <a href="listNotice.do?pageNo=${pageCount}">最后一页</a>
+         <a href="listNotice.do?pageNo=${pageNo+1}&value=2">下一页</a>
+         <a href="listNotice.do?pageNo=${pageCount}&value=2">最后一页</a>
       </c:if>
       <table >
         <tr><th>公告编号</th><th>公告内容</th><th>发布人</th><th>操作</th></tr>
