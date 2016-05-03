@@ -34,6 +34,7 @@
     <td><div> <a href="menu3.html" class="menuLink">资料管理</a>
       <ul class="menu" id="menu3">
         <li><a href="adminDocumentPublish.jsp" target="mainFrame">资料上传</a></li>
+        <li><a href="<%=request.getContextPath() %>/listDocument.do?value=2" target="mainFrame">查看资料</a></li>
         </ul>
     </div></td>
     </tr>
@@ -41,7 +42,7 @@
     <td><div> <a href="menu4.html" class="menuLink">事务管理</a>
       <ul class="menu" id="menu4">
         <li><a href="adminNoticePublish.jsp" target="mainFrame">发布公告</a></li>
-        <li><a href="<%=request.getContextPath() %>/listNotice.do" target="mainFrame">删除公告</a></li>
+        <li><a href="<%=request.getContextPath() %>/listNotice.do?value=2" target="mainFrame">删除公告</a></li>
         <li><a href="" target="mainFrame">添加友链</a></li>
         <li><a href="" target="mainFrame">删除友链</a></li>
         </ul>

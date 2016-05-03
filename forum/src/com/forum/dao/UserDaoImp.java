@@ -38,19 +38,14 @@ public class UserDaoImp implements UserDao {
 	public int pageSize = 5;
 
 	//"id,name,sex,password,email,authority_id,last_login_ime";
-	protected static String INSERT_SQL="insert into forum_user values(?,?,?,?,?,?,?)";
-	protected static String SELECT_SQL="select * from forum_user where name=? and password=?";
-	protected static String SELECT_ADMIN_SQL="select * from forum_user where name=? and password=? and authority_id=?";
-	protected static String UPDATE_password_SQL="update forum_user set password=? where name=?";
-	protected static String UPDATE_authority_SQL="update forum_user set authority_id=? where id=?";
-	protected static String UPDATE_date_SQL="update forum_user set last_login_time=? where name=?";
-	protected static String DELETE_SQL="delete from forum_user where name=?";
+	protected static String UPDATE_AUTHORITY_SQL="update forum_user set authority_id=? where id=?";
 	
 	@Override
 	public User create(User newUser) throws Exception {
 		try{
 	    	  con=DBConnect.getDBconnection();
-	    	  prepStmt =con.prepareStatement(INSERT_SQL); 
+	    	  String sql="insert into forum_user values(?,?,?,?,?,?,?)";
+	    	  prepStmt =con.prepareStatement(sql); 
 	    	  prepStmt1 = con.prepareStatement("select id from forum_user order by id desc limit 0,1");
 	          rs = prepStmt1.executeQuery();
 	          while(rs.next()) {
@@ -80,7 +75,8 @@ public class UserDaoImp implements UserDao {
 	public void remove(User user) throws Exception {
 		try {
 	    	con=DBConnect.getDBconnection();
-	    	prepStmt = con.prepareStatement(DELETE_SQL);
+	    	String sql="delete from forum_user where name=?";
+	    	prepStmt = con.prepareStatement(sql);
 	        prepStmt.setInt(1,user.getId());
 	        prepStmt.executeUpdate();
 	    }catch(Exception e) {
@@ -94,7 +90,8 @@ public class UserDaoImp implements UserDao {
 	public User find(User newUser) throws Exception {
 	    try {
 	        con=DBConnect.getDBconnection();
-            prepStmt = con.prepareStatement(SELECT_SQL);
+	        String sql ="select * from forum_user where name=? and password=?";
+            prepStmt = con.prepareStatement(sql);
             
             Date date = new Date();
     		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -130,7 +127,8 @@ public class UserDaoImp implements UserDao {
 	public User findAdmin(User newUser) throws Exception {
 	    try {
 	        con=DBConnect.getDBconnection();
-            prepStmt = con.prepareStatement(SELECT_ADMIN_SQL);
+	        String sql="select * from forum_user where name=? and password=? and authority_id=?";
+            prepStmt = con.prepareStatement(sql);
             
             Date date = new Date();
     		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -165,31 +163,11 @@ public class UserDaoImp implements UserDao {
 	}
 
 	@Override
-	public List<User> findAll() throws Exception {
-	    List<User> listUser = new ArrayList<User>();
-	    con=DBConnect.getDBconnection();  
-	    prepStmt = con.prepareStatement("select * from forum_user");
-        rs = prepStmt.executeQuery();
-        while(rs.next()) {
-        	user.setId(rs.getInt(1));
-        	user.setName(rs.getString(2)); 
-        	user.setSex(rs.getString(3));
-        	user.setPassword(rs.getString(4));
-        	user.setEmail(rs.getString(5));
-        	authority.setId(rs.getInt(6));
-        	user.setAuthority(ad.findName(authority).getName());
-        	user.setLastTime(rs.getString(7));
-            listUser.add(user);
-        }
-        DBConnect.closeDB(con, prepStmt, rs); 
-        return listUser;
-	}
-
-	@Override
 	public void updatePassword(User newUser) throws Exception {
 		try {
 	    	con=DBConnect.getDBconnection();
-			prepStmt = con.prepareStatement(UPDATE_password_SQL);
+	    	String sql="update forum_user set password=? where name=?";
+			prepStmt = con.prepareStatement(sql);
 	    	prepStmt.setString(1,Encipher.MD5(newUser.getPassword()));
 	    	prepStmt.setString(2,newUser.getName());
 	    	int rowCount=prepStmt.executeUpdate();
@@ -207,7 +185,8 @@ public class UserDaoImp implements UserDao {
 	public void updateDate(User newUser) throws Exception{
 		try {
 	    	con=DBConnect.getDBconnection();
-			prepStmt = con.prepareStatement(UPDATE_date_SQL);
+	    	String sql="update forum_user set last_login_time=? where name=?";
+			prepStmt = con.prepareStatement(sql);
 	    	prepStmt.setString(1,newUser.getLastTime());
 	    	prepStmt.setString(2,newUser.getName());
 	    	int rowCount=prepStmt.executeUpdate();

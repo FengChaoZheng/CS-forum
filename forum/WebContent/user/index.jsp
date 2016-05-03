@@ -90,9 +90,9 @@ function CheckForm(){
         <table width="200" border="0" class="table_content">
           <tr>
             <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=计算机专业课">数据结构</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">操作系统</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">计算机网络</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">计算机组成原理</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=计算机专业课">操作系统</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=计算机专业课">计算机网络</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=计算机专业课">计算机组成原理</a></td>
           </tr>
         </table>
       </div>
@@ -102,9 +102,9 @@ function CheckForm(){
       <div class="div_sub_content">
         <table width="200" border="0" class="table_content">
           <tr>
-            <td align="center" valign="middle" width="25%"><a href="">考研数学</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">考研英语</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">考研政治</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=考研公共课">考研数学</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=考研公共课">考研英语</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=考研公共课">考研政治</a></td>
             <td align="center" valign="middle" width="25%"><a href=""></a></td>
           </tr>
         </table>
@@ -115,10 +115,10 @@ function CheckForm(){
       <div class="div_sub_content">
         <table width="200" border="0" class="table_content">
           <tr>
-            <td align="center" valign="middle" width="25%"><a href="">生活交流</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">心路历程</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">跨考专版</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">面试经验</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=交流互动">生活交流</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=交流互动">心路历程</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=交流互动">跨考专版</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=交流互动">面试经验</a></td>
           </tr>
         </table>
       </div>
@@ -128,8 +128,8 @@ function CheckForm(){
       <div class="div_sub_content">
         <table width="200" border="0" class="table_content">
           <tr>
-            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listDocument.do">视频资料</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">历年真题</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listDocument.do?value=1">视频资料</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listDocument.do?value=1">历年真题</a></td>
             <td align="center" valign="middle" width="25%"><a href=""></a></td>
             <td align="center" valign="middle" width="25%"><a href=""></a></td>
           </tr>
@@ -141,10 +141,10 @@ function CheckForm(){
       <div class="div_sub_content">
         <table width="200" border="0" class="table_content">
           <tr>
-            <td align="center" valign="middle" width="25%"><a href="">华北、东北地区</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">华东、华中、华南地区</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">西北、西南地区</a></td>
-            <td align="center" valign="middle" width="25%"><a href=""></a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=名校交流">华北、东北地区</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=名校交流">华东、华中、华南地区</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=名校交流">西北、西南地区</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=名校交流"></a></td>
           </tr>
         </table>
       </div>
@@ -154,8 +154,8 @@ function CheckForm(){
       <div class="div_sub_content">
         <table width="200" border="0" class="table_content">
           <tr>
-            <td align="center" valign="middle" width="25%"><a href="">考研资料</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">其他</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=二手市场">考研资料</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=二手市场">其他</a></td>
             <td align="center" valign="middle" width="25%"><a href=""></a></td>
             <td align="center" valign="middle" width="25%"><a href=""></a></td>
           </tr>
@@ -167,9 +167,9 @@ function CheckForm(){
       <div class="div_sub_content">
         <table width="200" border="0" class="table_content">
           <tr>
-            <td align="center" valign="middle" width="25%"><a href="">原创美文</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">好书推荐</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">电影推荐</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=休闲角落">原创美文</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=休闲角落">好书推荐</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listContent.do?sectionName=休闲角落">电影推荐</a></td>
             <td align="center" valign="middle" width="25%"><a href=""></a></td>
           </tr>
         </table>
@@ -180,10 +180,10 @@ function CheckForm(){
       <div class="div_sub_content_last">
         <table width="200" border="0" class="table_content">
           <tr>
-            <td align="center" valign="middle" width="25%"><a href="">站务公告</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">友链申请</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">建议反馈</a></td>
-            <td align="center" valign="middle" width="25%"><a href="">违规检举</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listNotice.do?value=1">站务公告</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listNotice.do?value=1">友链申请</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listNotice.do?value=1">建议反馈</a></td>
+            <td align="center" valign="middle" width="25%"><a href="<%=request.getContextPath()%>/listNotice.do?value=1">违规检举</a></td>
           </tr>
         </table>
       </div>
