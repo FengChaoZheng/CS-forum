@@ -49,7 +49,7 @@ function CheckForm(){
           <td width="218">
             <input type="text" name="loginName" id="loginName" height="25px"/>
           </td>
-          <td width="71" align="left">忘记密码</td>
+          <td width="71" align="left"><a href="forgetPwd.jsp">忘记密码</a></td>
         </tr>
         <tr>
           <td height="34" align="right" valign="middle">密码：</td>

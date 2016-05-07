@@ -36,8 +36,11 @@ public class ModifyPwdController implements Controller{
         ud.updatePassword(user);
         
         session.removeAttribute("userName");
+        
+        String message = "恭喜您密码修改成功";
+        session.setAttribute("message", message);
 		
-		return new ModelAndView("user/modifySuccess");
+		return new ModelAndView("user/success");
 	}
 
 }

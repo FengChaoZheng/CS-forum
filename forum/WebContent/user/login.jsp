@@ -76,6 +76,7 @@ function checkForm(){
           <td width="25%" height="35px"></td>
           <td width="75%" align="left" valign="middle">
           	<input type="button" name="login" id="login" value="登录" onclick="checkForm()"/>
+          	&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/forgetPwd.jsp">忘记密码？</a>
           </td>
         </tr>
       </table>
