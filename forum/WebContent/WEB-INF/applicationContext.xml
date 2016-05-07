@@ -54,6 +54,7 @@
 				<prop key="listDocument.do">listDocument</prop>
 				<prop key="listContent.do">listContent</prop>
 				<prop key="publishContent.do">publishContent</prop>
+				<prop key="forgetPwd.do">forgetPwd</prop>
 			</props>
 		</property>
 	</bean>
@@ -103,6 +104,7 @@
 		<property name="content" ref="content"></property>
 		<property name="cd" ref="contentDaoImp"></property>
 	</bean>
+	<bean id="forgetPwd" class="com.forum.controller.ForgetPwdController" scope="prototype"></bean>
 	<!-- id的名字必须和HandlerMapping中保持一致。因为我们用的是SimpleUrlHandlerMapping -->
 	
 	<!-- 配置试图解析器 -->
