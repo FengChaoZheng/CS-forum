@@ -34,11 +34,8 @@ public class ListContentController implements Controller{
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		
-		String sectionName = ConvertEncoding.changeToUtf(request.getParameter("sectionName"));
-		System.out.println("首页传递过来的模块名："+sectionName);
-		session.setAttribute("sectionName", sectionName);
-		int sectionId = sd.findId(sectionName);
-		System.out.println("查询到的模块编号："+sectionId);
+		String strValue = request.getParameter("value");
+		int value = Integer.valueOf(strValue);
 
 		int pageNo = 1;// int pageSize=5;
 		String strPageNo = request.getParameter("pageNo");
@@ -49,15 +46,40 @@ public class ListContentController implements Controller{
 		ModelAndView mav = new ModelAndView();
 
 		try {
-			List<Content> contentlist = cd.listContent(pageNo,sectionId);
-			for (Content content : contentlist) {
-				System.out.println("content return :"+content.getId());
+			switch(value){
+			case 1:
+				String sectionName = ConvertEncoding.changeToUtf(request.getParameter("sectionName"));
+				System.out.println("首页传递过来的模块名："+sectionName);
+				session.setAttribute("sectionName", sectionName);
+				int sectionId = sd.findId(sectionName);
+				System.out.println("查询到的模块编号："+sectionId);
+				List<Content> contentlist = cd.listContent(pageNo,sectionId);
+				for (Content content : contentlist) {
+					System.out.println("content return :"+content.getId());
+				}
+				session.setAttribute("contentlist", contentlist);
+				Integer pageCount = new Integer(cd.getPageCount(sectionId));
+				request.setAttribute("pageCount", pageCount);
+				request.setAttribute("pageNo", pageNo);
+				mav.setViewName("user/content");
+				break;
+			case 2:
+				String sectionContent = request.getParameter("search");
+				System.out.println("首页传递过来的搜索值："+sectionContent);
+				session.setAttribute("sectionContent", sectionContent);
+				
+				List<Content> contentlist1 = cd.listContent(pageNo,sectionContent);
+				for (Content content : contentlist1) {
+					System.out.println("content return :"+content.getId());
+				}
+				session.setAttribute("contentlist", contentlist1);
+				Integer pageCount1 = new Integer(cd.getPageCount(sectionContent));
+				request.setAttribute("pageCount", pageCount1);
+				request.setAttribute("pageNo", pageNo);
+				mav.setViewName("user/searchContent");
+				break;
 			}
-			session.setAttribute("contentlist", contentlist);
-			Integer pageCount = new Integer(cd.getPageCount());
-			request.setAttribute("pageCount", pageCount);
-			request.setAttribute("pageNo", pageNo);
-			mav.setViewName("user/content");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

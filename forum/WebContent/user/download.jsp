@@ -62,6 +62,7 @@
 								<th>资料名称</th>
 								<th>发布人</th>
 								<th>操作</th>
+								<th>上传时间</th>
 							</tr>
 							<c:forEach items="${documentlist}" var="document">
 
@@ -72,6 +73,7 @@
 									<td><a
 										href="downloadDocument.do?filename=${document.savePath }">下载</a>
 									</td>
+									<td>${document.uploadTime}</td>
 								</tr>
 
 

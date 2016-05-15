@@ -4,15 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.forum.database.DBConnect;
 import com.forum.model.Authority;
 import com.forum.model.User;
+import com.forum.util.DateToString;
 import com.forum.util.Encipher;
 
 public class UserDaoImp implements UserDao {
@@ -93,9 +91,7 @@ public class UserDaoImp implements UserDao {
 	        String sql ="select * from forum_user where name=? and password=?";
             prepStmt = con.prepareStatement(sql);
             
-            Date date = new Date();
-    		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    		String time = format.format(date);
+    		String time = DateToString.strTimeCurrent();
     		user.setLastTime(time);
     		new UserDaoImp().updateDate(user);
     		
@@ -130,9 +126,7 @@ public class UserDaoImp implements UserDao {
 	        String sql="select * from forum_user where name=? and password=? and authority_id=?";
             prepStmt = con.prepareStatement(sql);
             
-            Date date = new Date();
-    		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    		String time = format.format(date);
+    		String time = DateToString.strTimeCurrent();
     		user.setLastTime(time);
     		new UserDaoImp().updateDate(user);
             
@@ -172,7 +166,7 @@ public class UserDaoImp implements UserDao {
 	    	prepStmt.setString(2,newUser.getName());
 	    	int rowCount=prepStmt.executeUpdate();
             if (rowCount == 0) {
-                   throw new Exception("Update Error:User Id:" + newUser.getName());
+            	throw new Exception("UpdatePassword Error:User Id:" + newUser.getName());
             }
         } catch (Exception e) {
         	e.printStackTrace();
@@ -191,7 +185,7 @@ public class UserDaoImp implements UserDao {
 	    	prepStmt.setString(2,newUser.getName());
 	    	int rowCount=prepStmt.executeUpdate();
             if (rowCount == 0) {
-                   throw new Exception("Update Error:User Name:" + newUser.getName());
+                   throw new Exception("UpdateDate Error:User Name:" + newUser.getName());
             }
         } catch (Exception e) {
         	e.printStackTrace();

@@ -40,7 +40,7 @@ function SubmitForm(){
   <div class="div_center">
   <form id="form_success" name="form_success" method="post">
     <div class="div_sub" style="height: 560px;">
-    <%if(session.getAttribute("message") != null){ %>
+    <%if(session.getAttribute("modifyPwdMessage") != null){ %>
       <div class="div_sub_title">
         <table width="100%">
           <tr>
@@ -51,11 +51,11 @@ function SubmitForm(){
       <table align="center" width="100%" height="100%">
         <tr>
           <td colspan="3" align="center" valign="middle">
-          	${message }&nbsp;&nbsp;<input type="button" name="modify" id="return" value="点击重新登录" onclick="SubmitForm()"/>
+          	${modifyPwdMessage }&nbsp;&nbsp;<input type="button" name="modify" id="return" value="点击重新登录" onclick="SubmitForm()"/>
           </td>
         </tr>
       </table>
-      <%}else if(session.getAttribute("info") != null){ %>
+      <%}else if(session.getAttribute("resetPwdInfo") != null){ %>
       <div class="div_sub_title">
         <table width="100%">
           <tr>
@@ -66,7 +66,7 @@ function SubmitForm(){
       <table align="center" width="100%" height="100%">
         <tr>
           <td colspan="3" align="center" valign="middle">
-          	${info }&nbsp;&nbsp;<input type="button" name="modify" id="return" value="点击重新登录" onclick="SubmitForm()"/>
+          	${resetPwdInfo }&nbsp;&nbsp;<input type="button" name="modify" id="return" value="点击重新登录" onclick="SubmitForm()"/>
           </td>
         </tr>
       </table>

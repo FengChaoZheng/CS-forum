@@ -11,6 +11,7 @@ public interface SectionDao {
 	public abstract String findName(int sectionId) throws Exception;
 	public abstract void update(Section section) throws Exception;
 	public abstract void delete(Section section) throws Exception;
-	public abstract List<Section> findAll() throws Exception;
+	public abstract int getPageCount() throws Exception;
+	public abstract List<Section> listSection(int pageNo) throws Exception;
 
 }

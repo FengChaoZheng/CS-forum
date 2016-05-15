@@ -23,7 +23,7 @@ public class ListDocumentController implements Controller{
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		int pageNo = 1;// int pageSize=5;
+		int pageNo = 1;// int pageSize=10;
 		String strPageNo = request.getParameter("pageNo");
 		if (strPageNo != null) {
 			pageNo = Integer.parseInt(strPageNo); // 把字符串转换成数字

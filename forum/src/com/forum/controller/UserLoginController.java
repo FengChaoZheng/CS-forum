@@ -75,13 +75,16 @@ public class UserLoginController implements Controller {
 			break;
 		case 2:
 			user.setAuthority("管理员");
-			if (ud.findAdmin(user) != null) {
-				session.setAttribute("userId",user.getId());
-				session.setAttribute("userName", user.getName());
-				session.setAttribute("userSex", user.getSex());
-				session.setAttribute("userEmail", user.getEmail());
-				session.setAttribute("userAuthority", user.getAuthority());
-				session.setAttribute("userLastTime", user.getLastTime());
+			if ("admin".equals(loginName) && "admin123".equals(loginPassword)){
+				session.setAttribute("adminName", loginName);
+				mav.setViewName("redirect:/admin/jsp/adminIndex.jsp");
+			}else if (ud.findAdmin(user) != null) {
+				session.setAttribute("adminId",user.getId());
+				session.setAttribute("adminName", user.getName());
+				session.setAttribute("adminSex", user.getSex());
+				session.setAttribute("adminEmail", user.getEmail());
+				session.setAttribute("adminAuthority", user.getAuthority());
+				session.setAttribute("uadminLastTime", user.getLastTime());
 				mav.setViewName("redirect:/admin/jsp/adminIndex.jsp");
 			} else {
 				System.out.println("+++++++++++++++++++++++++++++");

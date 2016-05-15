@@ -65,7 +65,7 @@ function checkPwd(){
         <table width="100%">
           <tr>
             <td align="left"><b>修改密码</b></td>
-            <td colspan="3" align="right"><a href="<%=request.getContextPath() %>/user/singel.jsp"><b>返回个人中心</b></a></td>
+            <td colspan="3" align="right"><a href="<%=request.getContextPath() %>/user/single.jsp"><b>返回个人中心</b></a></td>
           </tr>
         </table>
       </div>

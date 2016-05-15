@@ -30,7 +30,7 @@ public class PublishNoticeController implements Controller{
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		
-		Integer userId = (Integer) session.getAttribute("userId");
+		Integer userId = (Integer) session.getAttribute("adminId");
 		String content = request.getParameter("content");
 		
 		notice.setUserId(userId);

@@ -3,14 +3,12 @@ package com.forum.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.forum.database.DBConnect;
 import com.forum.model.Document;
+import com.forum.util.DateToString;
 
 public class DocumentDaoImp implements DocumentDao {
 
@@ -18,7 +16,7 @@ public class DocumentDaoImp implements DocumentDao {
 	private PreparedStatement prepStmt=null;
 	private ResultSet rs=null;
 	
-	public int pageSize = 5;
+	public int pageSize = 10;
 	
 	//id,name,user_id,upload_time,save_path
 	protected static String INSERT_SQL = "insert into forum_document values(?,?,?,?,?)";
@@ -41,9 +39,7 @@ public class DocumentDaoImp implements DocumentDao {
 	    	  System.out.println("newDocument getUserName:"+newDocument.getUserName());
 	    	  prepStmt.setString(3, newDocument.getUserName());//user_name
 	    	  
-	    	  Date date = new Date();
-	    	  DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	    	  String time = format.format(date);
+	    	  String time = DateToString.strTimeCurrent();
 	    	  
 	    	  prepStmt.setString(4, time);//upload_time
 	    	  

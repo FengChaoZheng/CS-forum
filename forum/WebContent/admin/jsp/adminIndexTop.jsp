@@ -45,7 +45,7 @@ a:active {
 			</tr>
 			<tr>
 				<td width="50%" align="right" valign="bottom">
-					<font style="font-size: 20px; padding-right: 15px">${userName}&nbsp;&nbsp;
+					<font style="font-size: 20px; padding-right: 15px">${adminName}&nbsp;&nbsp;
 					<a href="<%=request.getContextPath() %>/exit.do?value=2" target="_parent">安全退出</a>
 				</font>
 				</td>
