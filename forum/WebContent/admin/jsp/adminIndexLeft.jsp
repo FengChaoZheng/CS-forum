@@ -16,17 +16,17 @@
     <td><div> <a href="menu1.html" class="menuLink">用户管理</a>
       <ul class="menu" id="menu1">
         <li><a href="<%=request.getContextPath() %>/listUser.do" target="mainFrame">查看用户</a></li>
-        <li><a href="" target="mainFrame">权限管理</a></li>
+        <li><a href="<%=request.getContextPath() %>/listAuthority.do" target="mainFrame">权限管理</a></li>
         </ul>
     </div></td>
     </tr>
   <tr>
     <td><div> <a href="menu2.html" class="menuLink">模块管理</a>
       <ul class="menu" id="menu2">
-        <li><a href="" target="mainFrame">查看模块</a></li>
-        <li><a href="" target="mainFrame">添加模块</a></li>
-        <li><a href="" target="mainFrame">修改模块</a></li>
-        <li><a href="" target="mainFrame">删除模块</a></li>
+        <li><a href="<%=request.getContextPath() %>/listSection.do" target="mainFrame">查看模块</a></li>
+        <li><a href="<%=request.getContextPath() %>/listSection.do" target="mainFrame">添加模块</a></li>
+        <li><a href="<%=request.getContextPath() %>/listSection.do" target="mainFrame">修改模块</a></li>
+        <li><a href="<%=request.getContextPath() %>/listSection.do" target="mainFrame">删除模块</a></li>
         </ul>
     </div></td>
     </tr>
@@ -42,9 +42,9 @@
     <td><div> <a href="menu4.html" class="menuLink">事务管理</a>
       <ul class="menu" id="menu4">
         <li><a href="adminNoticePublish.jsp" target="mainFrame">发布公告</a></li>
-        <li><a href="<%=request.getContextPath() %>/listNotice.do?value=2" target="mainFrame">删除公告</a></li>
-        <li><a href="" target="mainFrame">添加友链</a></li>
-        <li><a href="" target="mainFrame">删除友链</a></li>
+        <li><a href="<%=request.getContextPath() %>/listNotice.do?value=2" target="mainFrame">管理公告</a></li>
+        <li><a href="<%=request.getContextPath() %>/listNotice.do?value=2" target="mainFrame">添加友链</a></li>
+        <li><a href="<%=request.getContextPath() %>/listNotice.do?value=2" target="mainFrame">管理友链</a></li>
         </ul>
     </div></td>
   </tr>

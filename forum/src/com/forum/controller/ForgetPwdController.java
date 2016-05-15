@@ -18,10 +18,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
+import com.forum.dao.UserDao;
+import com.forum.dao.UserDaoImp;
 import com.forum.email.MyAuthenticator;
+import com.forum.model.User;
 
-public class ForgetPwdController implements Controller{
-	
+public class ForgetPwdController implements Controller {
+
 	private static final String MAIL_SERVER_HOST = "smtp.qq.com";
 	private static final String USER = "1690314525";
 	private static final String PASSWORD = "qzoaopzvjwjjedbj";
@@ -30,57 +33,65 @@ public class ForgetPwdController implements Controller{
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+
 		request.setCharacterEncoding("utf-8");
 		HttpSession httpSession = request.getSession();
-		
+
+		String userName = request.getParameter("userName");
+		System.out.println("忘记密码的用户名："+userName);
 		String mailTo = request.getParameter("email");
-		System.out.println("收件人："+mailTo);
-		
+		System.out.println("收件人：" + mailTo);
+
 		String info = null;
+
+		Properties prop = new Properties();
+		prop.setProperty("mail.debug", "true");
+		prop.setProperty("mail.transport.protocol", "smtps");
+		prop.setProperty("mail.host", MAIL_SERVER_HOST);
+		prop.setProperty("mail.port", "465");
+		prop.setProperty("mail.smtp.auth", "true");
+
+		Authenticator auth = new MyAuthenticator(USER, PASSWORD);
+		// 1、创建session
+		Session session = Session.getDefaultInstance(prop, auth);
+		Transport ts = null;
 		
-			Properties prop = new Properties();
-			prop.setProperty("mail.debug", "true");
-			prop.setProperty("mail.transport.protocol", "smtps");
-			prop.setProperty("mail.host", MAIL_SERVER_HOST);
-			prop.setProperty("mail.port", "465");
-			prop.setProperty("mail.smtp.auth", "true");
-			
-			Authenticator auth = new MyAuthenticator(USER,PASSWORD);
-			// 1、创建session
-			Session session = Session.getDefaultInstance(prop,auth);
-			Transport ts = null;
-			
-			try {
-				// 2、通过session得到transport对象
-				ts = session.getTransport();
-			} catch (NoSuchProviderException e) {
-				e.printStackTrace();
-			}
-			
-			try {
-				// 3、连上邮件服务器
-				ts.connect(MAIL_SERVER_HOST, USER, PASSWORD);
-				// 4、创建邮件
-				MimeMessage message = new MimeMessage(session);
-				// 邮件消息头
-				message.setFrom(new InternetAddress(MAIL_FROM));// 邮件的发件人
-				message.setRecipient(Message.RecipientType.TO, new InternetAddress(
-						mailTo));// 邮件的收件人
-				message.setSubject("测试文本邮件");// 邮件的标题
-				// 邮件消息体
-				message.setText("测试文本邮件发送！！！郑锋超");
-				// 5、发送邮件
-				ts.sendMessage(message, message.getAllRecipients());
-				ts.close();
-				info = "密码重置信息已发送到您的邮箱，请及时查看！！！";
-				httpSession.setAttribute("info", info);
-			} catch (AddressException e) {
-				e.printStackTrace();
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			} 
-		
+		UserDao ud = new UserDaoImp();
+		User user = new User();
+		user.setName(userName);
+		user.setPassword("666666");
+		ud.updatePassword(user);
+
+		try {
+			// 2、通过session得到transport对象
+			ts = session.getTransport();
+		} catch (NoSuchProviderException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			// 3、连上邮件服务器
+			ts.connect(MAIL_SERVER_HOST, USER, PASSWORD);
+			// 4、创建邮件
+			MimeMessage message = new MimeMessage(session);
+			// 邮件消息头
+			message.setFrom(new InternetAddress(MAIL_FROM));// 邮件的发件人
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(
+					mailTo));// 邮件的收件人
+			message.setSubject("测试文本邮件");// 邮件的标题
+			// 邮件消息体
+			message.setText("您的密码已经被重置为666666，请您及时登录系统修改密码避免盗号危险！！！");
+			// 5、发送邮件
+			ts.sendMessage(message, message.getAllRecipients());
+			ts.close();
+			info = "密码重置信息已发送到您的邮箱，请及时查看！！！";
+			httpSession.setAttribute("resetPwdInfo", info);
+		} catch (AddressException e) {
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
 		return new ModelAndView("user/success");
 	}
 

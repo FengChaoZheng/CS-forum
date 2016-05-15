@@ -20,14 +20,28 @@ public class ExitController implements Controller{
 		String strValue = request.getParameter("value");
 		int value = Integer.parseInt(strValue);
 		
-		session.removeAttribute("userName");
-		
 		ModelAndView mav = new ModelAndView();
 		switch(value){
 		case 1:
+			session.removeAttribute("userId");
+			session.removeAttribute("userName");
+			session.removeAttribute("userSex");
+			session.removeAttribute("userEmail");
+			session.removeAttribute("userAuthority");
+			session.removeAttribute("userLastTime");
+			session.removeAttribute("downloadMessage");
+
 			mav.setViewName("redirect:/user/index.jsp");
 			break;
 		case 2:
+			session.removeAttribute("adminId");
+			session.removeAttribute("adminName");
+			session.removeAttribute("adminSex");
+			session.removeAttribute("adminEmail");
+			session.removeAttribute("adminAuthority");
+			session.removeAttribute("adminLastTime");
+			session.removeAttribute("uploadMessage");
+			
 			mav.setViewName("redirect:/admin/adminLogin.jsp");
 		}
 		return mav;

@@ -54,7 +54,7 @@ function availableEmail(){
   
   <div class="div_center">
   <form id="form_resetPwd" name="form_resetPwd" method="post">
-    <div class="div_sub">
+    <div class="div_sub" style="height: 460px">
       <div class="div_sub_title">
         <table width="100%">
           <tr>
@@ -63,14 +63,20 @@ function availableEmail(){
           </tr>
         </table>
       </div>
-      <table align="center">
+      
+      <table align="center" style="margin-top: 150px">
+      	<tr style="visibility: hidden;">
+          <td width="127" height="30px" align="right">用户名：</td>
+          <td colspan="3" align="left">
+            <input name="userName" type="text" id="userName" value="${forgetPwdUserName }"/>
+          </td>
+        </tr>
         <tr>
           <td width="127" height="30px" align="right">邮箱：</td>
           <td colspan="3" align="left">
             <input name="email" type="text" id="email" onblur="availableEmail()"/>
           </td>
         </tr>
-        
         <tr>
           <td width="127" height="35px"></td>
           <td colspan="3" align="left" valign="middle">

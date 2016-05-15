@@ -33,7 +33,7 @@ public class DocumentDownloadController implements Controller{
 		File file = new File(path+"\\"+fileName);
 		//如果文件不存在
 		if(!file.exists()){
-			session.setAttribute("message", "您要下载的资源已被删除！！");
+			session.setAttribute("downloadMessage", "您要下载的资源已被删除！！");
 			return new ModelAndView("redirect:/user/false.jsp");
 		}
 		//处理文件名

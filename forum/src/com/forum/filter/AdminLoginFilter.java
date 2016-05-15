@@ -24,10 +24,10 @@ public class AdminLoginFilter implements Filter{
 			FilterChain chain) throws IOException, ServletException {
 
 		HttpSession session=((HttpServletRequest)request).getSession();
-	    System.out.println("userName:"+session.getAttribute("userName"));
-	    if(session.getAttribute("userName")==null)
+	    System.out.println("后台过滤器验证登录查看会话内容的管理员用户名："+session.getAttribute("adminName"));
+	    if(session.getAttribute("adminName")==null)
 	    {
-	    	((HttpServletResponse)response).sendRedirect("../adminLogin.jsp");
+	    	((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath()+"/admin/adminLogin.jsp");
 	    }
 	    else
 	    {

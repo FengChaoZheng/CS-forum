@@ -17,6 +17,8 @@ public class AuthorityDaoImp implements AuthorityDao {
 		this.authority = authority;
 	}
 	
+	public int pageSize = 5;
+	
 	private Connection con=null;
 	private PreparedStatement prepStmt=null;
 	private PreparedStatement prepStmt1=null;
@@ -93,18 +95,28 @@ public class AuthorityDaoImp implements AuthorityDao {
 	}
 
 	@Override
-	public List<Authority> findAll() throws Exception {
-		List<Authority> listAuthority = new ArrayList<Authority>();
-	    con=DBConnect.getDBconnection();  
-	    prepStmt = con.prepareStatement("select * from forum_authority");
-        rs = prepStmt.executeQuery();
-        while(rs.next()) {
-        	authority.setId(rs.getInt(1));
-            authority.setName(rs.getString(2)); 
-            listAuthority.add(authority);
-        }
-        DBConnect.closeDB(con, prepStmt, rs); 
-        return listAuthority;
+	public List<Authority> listAuthority(int pageNo) throws Exception {
+		int startRecno=(pageNo-1)*pageSize;
+		ArrayList<Authority> authorityList=new ArrayList<Authority>();
+		try {
+			con = DBConnect.getDBconnection();
+			String sql = "select * from forum_authority order by id limit ?,?";
+			prepStmt=con.prepareStatement(sql);
+			prepStmt.setInt(1,startRecno);
+			prepStmt.setInt(2,pageSize);
+			rs=prepStmt.executeQuery();
+			while(rs.next()) {
+				Authority newAuthority = new Authority();
+				newAuthority.setId(rs.getInt(1));
+				newAuthority.setName(rs.getString(2)); 
+				authorityList.add(newAuthority);
+	        }
+		}finally {
+			rs.close();
+			prepStmt.close();
+			DBConnect.closeDB(con, prepStmt, rs);;
+		}
+		return authorityList;
 	}
 
 	@Override
@@ -137,6 +149,26 @@ public class AuthorityDaoImp implements AuthorityDao {
 	    } finally{
 	    	 DBConnect.closeDB(con, prepStmt, rs);
 	    }
+	}
+
+	@Override
+	public int getPageCount() throws Exception {
+		int recordCount=0,t1=0,t2=0;
+		try {
+			con = DBConnect.getDBconnection();
+			String sql = "select count(*) from forum_authority";
+			prepStmt=con.prepareStatement(sql);
+			rs=prepStmt.executeQuery();
+			rs.next();
+			recordCount=rs.getInt(1);
+			t1=recordCount%pageSize;
+			t2=recordCount/pageSize;
+		}finally {
+			rs.close();
+			prepStmt.close();
+			DBConnect.closeDB(con, prepStmt, rs);;
+		}
+		return t1==0?t2:t2+1;
 	}
 
 }

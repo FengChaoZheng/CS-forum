@@ -108,7 +108,13 @@ function checkForm(){
   </div>
   
   <div class="div_center">
-  
+    <%if(session.getAttribute("info") != null){
+    	out.println("<script language='JavaScript'>");
+    	out.println("alert('"+session.getAttribute("info")+"')");
+    	//out.println("history.go(-1)");
+    	out.println("</script>");
+    	session.removeAttribute("info");
+    }%>
     <div class="div_sub">
       <div class="div_sub_title">
         <table width="100%">

@@ -61,8 +61,8 @@ function checkForm(){
       </div>
       <c:if test="${pageCount>0}">
         共有${pageCount}页，这是第${pageNo}页。
-        <c:if test="${pageNo>1}"> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=1">第一页</a> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=${pageNo-1}">上一页</a> </c:if>
-        <c:if test="${pageNo!=pageCount}"> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=${pageNo+1}">下一页</a> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=${pageCount}">最后一页</a> </c:if>
+        <c:if test="${pageNo>1}"> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=1&value=1&sectionName=${sectionName}">第一页</a> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=${pageNo-1}&value=1&sectionName=${sectionName}">上一页</a> </c:if>
+        <c:if test="${pageNo!=pageCount}"> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=${pageNo+1}&value=1&sectionName=${sectionName}">下一页</a> <a href="<%= request.getContextPath() %>/listContent.do?pageNo=${pageCount}&value=1&sectionName=${sectionName}">最后一页</a> </c:if>
         <table class="table_document">
           <tr>
             <th>发帖人</th>
@@ -80,8 +80,8 @@ function checkForm(){
           </c:forEach>
         </table>
         共有${pageCount}页，这是第${pageNo}页。
-        <c:if test="${pageNo>1}"> <a href="listContent.do?pageNo=1">第一页</a> <a href="listContent.do?pageNo=${pageNo-1}">上一页</a> </c:if>
-        <c:if test="${pageNo!=pageCount}"> <a href="listContent.do?pageNo=${pageNo+1}">下一页</a> <a href="listContent.do?pageNo=${pageCount}">最后一页</a> </c:if>
+        <c:if test="${pageNo>1}"> <a href="listContent.do?pageNo=1&value=1&sectionName=${sectionName}">第一页</a> <a href="listContent.do?pageNo=${pageNo-1}&value=1&sectionName=${sectionName}">上一页</a> </c:if>
+        <c:if test="${pageNo!=pageCount}"> <a href="listContent.do?pageNo=${pageNo+1}&value=1&sectionName=${sectionName}">下一页</a> <a href="listContent.do?pageNo=${pageCount}&value=1&sectionName=${sectionName}">最后一页</a> </c:if>
         <br>
       </c:if>
       <c:if test="${pageCount==0}">

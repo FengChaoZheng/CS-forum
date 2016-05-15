@@ -19,6 +19,16 @@ function checkForm(){
 	  document.form_login.submit();	
 	}
 }
+function postForm(){
+	if(document.form_login.name.value==""){
+		alert("请输入您的用户名");
+		document.form_login.name.focus();
+		return false;
+	}else{
+		document.form_login.action = "<%=request.getContextPath()%>/toForgetPwd.do";
+		document.form_login.submit();
+	}
+}
 </script>
 </head>
 
@@ -48,7 +58,13 @@ function checkForm(){
   </div>
   
   <div class="div_center">
-  
+    <%if(session.getAttribute("info") != null){
+    	out.println("<script language='JavaScript'>");
+    	out.println("alert('"+session.getAttribute("info")+"')");
+    	//out.println("history.go(-1)");
+    	out.println("</script>");
+    	session.removeAttribute("info");
+    }%>
     <div class="div_sub" style="height: 560px;">
       <div class="div_sub_title">
         <table width="100%">
@@ -76,7 +92,7 @@ function checkForm(){
           <td width="25%" height="35px"></td>
           <td width="75%" align="left" valign="middle">
           	<input type="button" name="login" id="login" value="登录" onclick="checkForm()"/>
-          	&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/forgetPwd.jsp">忘记密码？</a>
+          	&nbsp;&nbsp;<input type="button" name="forgetPwd" id="forgetPwd" value="忘记密码" onclick="postForm()"/>
           </td>
         </tr>
       </table>

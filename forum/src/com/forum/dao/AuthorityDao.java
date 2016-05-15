@@ -11,5 +11,6 @@ public interface AuthorityDao {
 	public abstract Authority findName(Authority authority) throws Exception;
 	public abstract void update(Authority authority) throws Exception;
 	public abstract void delete(Authority authority) throws Exception;
-	public abstract List<Authority> findAll() throws Exception;
+	public abstract int getPageCount() throws Exception;
+	public abstract List<Authority> listAuthority(int pageNo) throws Exception;
 }

@@ -3,6 +3,7 @@ package com.forum.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.forum.database.DBConnect;
@@ -16,6 +17,8 @@ public class SectionDaoImp implements SectionDao {
 	
 	public int id = 0;
 	public String name = null;
+	
+	public int pageSize = 5;
 
 	@Override
 	public Section create(Section section) throws Exception {
@@ -73,8 +76,50 @@ public class SectionDaoImp implements SectionDao {
 	}
 
 	@Override
-	public List<Section> findAll() throws Exception {
-		return null;
+	public int getPageCount() throws Exception {
+		
+		int recordCount=0,t1=0,t2=0;
+		try {
+			con = DBConnect.getDBconnection();
+			String sql = "select count(*) from forum_section";
+			prepStmt=con.prepareStatement(sql);
+			rs=prepStmt.executeQuery();
+			rs.next();
+			recordCount=rs.getInt(1);
+			t1=recordCount%pageSize;
+			t2=recordCount/pageSize;
+		}finally {
+			rs.close();
+			prepStmt.close();
+			DBConnect.closeDB(con, prepStmt, rs);;
+		}
+		return t1==0?t2:t2+1;
+	}
+
+	@Override
+	public List<Section> listSection(int pageNo) throws Exception {
+
+		int startRecno=(pageNo-1)*pageSize;
+		ArrayList<Section> sectionList=new ArrayList<Section>();
+		try {
+			con = DBConnect.getDBconnection();
+			String sql = "select * from forum_section order by id limit ?,?";
+			prepStmt=con.prepareStatement(sql);
+			prepStmt.setInt(1,startRecno);
+			prepStmt.setInt(2,pageSize);
+			rs=prepStmt.executeQuery();
+			while(rs.next()) {
+				Section newSection = new Section();
+				newSection.setId(rs.getInt(1));
+				newSection.setName(rs.getString(2)); 
+	            sectionList.add(newSection);
+	        }
+		}finally {
+			rs.close();
+			prepStmt.close();
+			DBConnect.closeDB(con, prepStmt, rs);;
+		}
+		return sectionList;
 	}
 
 }

@@ -41,7 +41,7 @@ public class DocumentPublishController implements Controller{
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		
-		String userName = (String) session.getAttribute("userName");
+		String userName = (String) session.getAttribute("adminName");
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -146,18 +146,18 @@ public class DocumentPublishController implements Controller{
 			}
 		}catch(FileUploadBase.FileSizeLimitExceededException e){
 			e.printStackTrace();
-			request.setAttribute("message", "单个文件超出最大值！！！");
+			request.setAttribute("uploadMessage", "单个文件超出最大值！！！");
 			mav.setViewName("redirect:/admin/jsp/adminDocumentPublish.jsp");
 		}catch(FileUploadBase.SizeLimitExceededException e){
 			e.printStackTrace();
-			request.setAttribute("message", "上传文件的总大小超出限制的最大值！！！");
+			request.setAttribute("uploadMessage", "上传文件的总大小超出限制的最大值！！！");
 			mav.setViewName("redirect:/admin/jsp/adminDocumentPublish.jsp");
 		}catch(Exception e){
 			message = "文件上传失败！";
 			e.printStackTrace();
 		}
 //		request.setAttribute("message", message);
-		session.setAttribute("message", message);
+		session.setAttribute("uploadMessage", message);
 		mav.setViewName("redirect:/admin/jsp/adminDocumentPublish.jsp");
 		
 		return mav;

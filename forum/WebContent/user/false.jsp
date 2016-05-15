@@ -49,10 +49,10 @@
       </div>
       <table align="center" width="100%" height="100%">
       	<tr>
-      		<td align="center" valign="bottom">${message}</td>
+      		<td align="center" valign="bottom">${downloadMessage}</td>
       	</tr>
       	<tr>
-      		<td align="center" valign="top"><a href="<%=request.getContextPath() %>/listDocument.do"><input type="button" value="返回下载列表"></a></td>
+      		<td align="center" valign="top"><a href="<%=request.getContextPath() %>/listDocument.do?value=1"><input type="button" value="返回下载列表"></a></td>
       	</tr>
       </table>
     </div>

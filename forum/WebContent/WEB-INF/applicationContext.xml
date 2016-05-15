@@ -43,7 +43,7 @@
 				<prop key="checkcode.do">checkcode</prop>
 				<prop key="changeCheckcode.do">changeCheckcode</prop>
 				<prop key="toLogin.do">toLogin</prop>
-				<prop key="toSingel.do">toSingel</prop>
+				<prop key="toSingle.do">toSingle</prop>
 				<prop key="toModifyPwd.do">toModifyPwd</prop>
 				<prop key="modifyPwd.do">modifyPwd</prop>
 				<prop key="listUser.do">listUser</prop>
@@ -55,6 +55,9 @@
 				<prop key="listContent.do">listContent</prop>
 				<prop key="publishContent.do">publishContent</prop>
 				<prop key="forgetPwd.do">forgetPwd</prop>
+				<prop key="toForgetPwd.do">toForgetPwd</prop>
+				<prop key="listSection.do">listSection</prop>
+				<prop key="listAuthority.do">listAuthority</prop>
 			</props>
 		</property>
 	</bean>
@@ -72,7 +75,7 @@
 	<bean id="checkcode" class="com.forum.checkcode.Checkcode" scope="prototype"></bean>
 	<bean id="changeCheckcode" class="com.forum.checkcode.ChangeCheckcode" scope="prototype"></bean>
 	<bean id="toLogin" class="com.forum.controller.ToLoginController" scope="prototype"></bean>
-	<bean id="toSingel" class="com.forum.controller.ToSingelController" scope="prototype"></bean>
+	<bean id="toSingle" class="com.forum.controller.ToSingleController" scope="prototype"></bean>
 	<bean id="toModifyPwd" class="com.forum.controller.ToModifyPwdController" scope="prototype"></bean>
 	<bean id="modifyPwd" class="com.forum.controller.ModifyPwdController" scope="prototype">
 		<property name="ud" ref="userDaoImp"/>
@@ -105,6 +108,13 @@
 		<property name="cd" ref="contentDaoImp"></property>
 	</bean>
 	<bean id="forgetPwd" class="com.forum.controller.ForgetPwdController" scope="prototype"></bean>
+	<bean id="toForgetPwd" class="com.forum.controller.ToForgetPwdController" scope="prototype"></bean>
+	<bean id="listSection" class="com.forum.page.ListSectionController" scope="prototype">
+		<property name="sd" ref="sectionDaoImp"></property>
+	</bean>
+	<bean id="listAuthority" class="com.forum.page.ListAuthorityController" scope="prototype">
+		<property name="ad" ref="authorityDaoImp"></property>
+	</bean>
 	<!-- id的名字必须和HandlerMapping中保持一致。因为我们用的是SimpleUrlHandlerMapping -->
 	
 	<!-- 配置试图解析器 -->
